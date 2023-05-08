@@ -6,7 +6,7 @@ import type { Chain } from 'wagmi/chains';
 import { AccountImplementation } from "@zerodevapp/sdk/dist/src/accounts";
 import { BaseAccountAPI, BaseApiParams } from "@zerodevapp/sdk/dist/src/BaseAccountAPI";
 import { CHAIN_ID_TO_INFURA_NAME } from "@zerodevapp/web3auth/dist/constants";
-import { ProjectConfiguration } from "@zerodevapp/sdk/dist/src/types";
+import { ProjectConfiguration, SupportedGasToken } from "@zerodevapp/sdk/dist/src/types";
 
 export type AccountParams = {
     shimDisconnect?: boolean
@@ -17,7 +17,8 @@ export type AccountParams = {
     bundlerUrl?: string
     implementation?: AccountImplementation<BaseAccountAPI, BaseApiParams>
     hooks?: Hooks
-    disconnect?: () => Promise<any>
+    disconnect?: () => Promise<any>,
+    gasToken?: SupportedGasToken
 }
 
 export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDevProvider, Options, ZeroDevSigner> {
