@@ -570,6 +570,18 @@
     tweetnacl "^1.0.3"
     tweetnacl-util "^0.15.1"
 
+"@metamask/eth-sig-util@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@metamask/eth-sig-util/-/eth-sig-util-5.1.0.tgz#a47f62800ee1917fef976ba67544a0ccd7d1bd6b"
+  integrity sha512-mlgziIHYlA9pi/XZerChqg4NocdOgBPB9NmxgXWQO2U2hH8RGOJQrz6j/AIKkYxgCMIE2PY000+joOwXfzeTDQ==
+  dependencies:
+    "@ethereumjs/util" "^8.0.6"
+    bn.js "^4.12.0"
+    ethereum-cryptography "^2.0.0"
+    ethjs-util "^0.1.6"
+    tweetnacl "^1.0.3"
+    tweetnacl-util "^0.15.1"
+
 "@metamask/obs-store@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@metamask/obs-store/-/obs-store-7.0.0.tgz#6cae5f28306bb3e83a381bc9ae22682316095bd3"
@@ -2012,10 +2024,10 @@
   resolved "https://registry.yarnpkg.com/@zerodevapp/contracts/-/contracts-2.0.8.tgz#b9e6164a032a3128428935f96440cc72f44b0e65"
   integrity sha512-o76jzJPJ2nb2zR72jP+R8AzFuEEAqtjPdMOKaQ9Jl/5XPf6CIAX6BjExFKNhJkuNOHhnoWuNABOlwfIifLGHvA==
 
-"@zerodevapp/sdk@3.0.11":
-  version "3.0.11"
-  resolved "https://registry.yarnpkg.com/@zerodevapp/sdk/-/sdk-3.0.11.tgz#1f548b68c0590e27daaee6ebb893af9afb5470c9"
-  integrity sha512-2XUWc+rxW8P086CZZhEYlp1tsMOjnFPn3LgbQZe6i0iu0mUWhYUT2SRIfyYYcONpEP5ZcSINuAn5os/wUYcjDA==
+"@zerodevapp/sdk@3.1.5":
+  version "3.1.5"
+  resolved "https://registry.yarnpkg.com/@zerodevapp/sdk/-/sdk-3.1.5.tgz#31c9a90a9f74cd66b8d6c2a782ac7a0a41f43d30"
+  integrity sha512-GWc9c/AxDq+j9FatTD4LWj5BhVVo+QXjOA4+2c9CUzivhc1miq2Bxc3KcD6JrWjnNaNm8LZjvOWNw/FLY5KoeQ==
   dependencies:
     "@account-abstraction/utils" "^0.4.0"
     "@ambire/signature-validator" "^1.3.0"
@@ -2025,27 +2037,26 @@
     "@ethersproject/properties" "^5.7.0"
     "@ethersproject/providers" "^5.7.0"
     "@ethersproject/shims" "^5.7.0"
+    "@metamask/eth-sig-util" "^5.1.0"
     "@openzeppelin/contracts" "^4.8.2"
     "@types/debug" "^4.1.7"
     "@zerodevapp/contracts" "^2.0.8"
     "@zerodevapp/contracts-new" "npm:@zerodevapp/contracts@^3.0.0-rc.5"
     base64-js "^1.5.1"
     debug "^4.3.4"
-    ethers "^5.7.0"
-    ethers-eip712 "^0.2.0"
     merkletreejs "^0.3.9"
 
-"@zerodevapp/web3auth@3.0.12":
-  version "3.0.12"
-  resolved "https://registry.yarnpkg.com/@zerodevapp/web3auth/-/web3auth-3.0.12.tgz#4dced363c2e587c3d9c165748542fbe707a40aa4"
-  integrity sha512-D0tT1dgF7uLmGrVuoJ/ucHj/6Kc8LdthDqDSozg8NBJ1fkk04n7rQeyqauD1k0QdnvLHCqzb/GmwTuiODn1GSQ==
+"@zerodevapp/web3auth@3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@zerodevapp/web3auth/-/web3auth-3.1.1.tgz#72f521e439a10dafcb6029480ba086647215cf11"
+  integrity sha512-7LXjpmJM5diVdYoDfxgkeak86ngO7mIqIQZ1u9I1C4OtxR6SQHe23VoMU3GqcZUYACvQWXI8xcy6qcDJgDgr9A==
   dependencies:
     "@walletconnect/client" "^1.8.0"
     "@web3auth/base" "5.0.1"
     "@web3auth/modal" "5.0.1"
     "@web3auth/no-modal" "5.0.1"
     "@web3auth/openlogin-adapter" "5.0.1"
-    "@zerodevapp/sdk" "3.0.11"
+    "@zerodevapp/sdk" "3.1.5"
 
 JSONStream@^1.3.5:
   version "1.3.5"
@@ -2249,7 +2260,7 @@ bn.js@4.11.8:
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
   integrity sha512-ItfYfPLkWHUjckQCk8xC+LwxgK8NYcXywGigJgSwOP8Y2iyWT4f2vsZnoOXTTbo+o5yXmIUJ4gn5538SO5S3gA==
 
-bn.js@^4.11.8, bn.js@^4.11.9:
+bn.js@^4.11.8, bn.js@^4.11.9, bn.js@^4.12.0:
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.12.0.tgz#775b3f278efbb9718eec7361f483fb36fbbfea88"
   integrity sha512-c98Bf3tPniI+scsdk237ku1Dc3ujXQTSgyiPUDEOe7tRkhrqridvh8klBv0HCEso1OLOYcHuCv/cS6DNxKH+ZA==
@@ -2997,11 +3008,6 @@ ethereumjs-util@^7.1.0:
     create-hash "^1.1.2"
     ethereum-cryptography "^0.1.3"
     rlp "^2.2.4"
-
-ethers-eip712@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/ethers-eip712/-/ethers-eip712-0.2.0.tgz#52973b3a9a22638f7357283bf66624994c6e91ed"
-  integrity sha512-fgS196gCIXeiLwhsWycJJuxI9nL/AoUPGSQ+yvd+8wdWR+43G+J1n69LmWVWvAON0M6qNaf2BF4/M159U8fujQ==
 
 ethers@^5.6.5, ethers@^5.7.0, ethers@^5.7.2:
   version "5.7.2"
