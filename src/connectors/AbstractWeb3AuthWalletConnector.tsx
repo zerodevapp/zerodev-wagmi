@@ -1,18 +1,17 @@
 import { AccountParams, ZeroDevConnector } from "./ZeroDevConnector";
-import { ZeroDevWeb3Auth, ExtendedWeb3Auth, ExtendedWeb3AuthInitOptions, LoginProvider } from '@zerodevapp/web3auth'
+import { ZeroDevWeb3Auth, type ZeroDevWeb3AuthOptions, type LoginProvider, type ZeroDevWeb3AuthInitOptions } from '@zerodevapp/web3auth'
 import { getRPCProviderOwner } from '@zerodevapp/sdk';
 import { Signer, getClient } from '@wagmi/core';
 import type { Chain } from 'wagmi/chains';
 import { connect } from 'wagmi/actions'
 import { ChainId } from "@zerodevapp/web3auth/dist/types";
-import { OpenloginAdapterOptions } from "@web3auth/openlogin-adapter";
 
-export type AbstractWeb3AuthWalletConnectorOptions = Omit<Partial<AccountParams>, "owner" | "disconnect"> & {adapterSettings?: OpenloginAdapterOptions['adapterSettings']}
+export type AbstractWeb3AuthWalletConnectorOptions = Omit<Partial<AccountParams>, "owner" | "disconnect"> & Partial<ZeroDevWeb3AuthOptions>
 
 export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector<AbstractWeb3AuthWalletConnectorOptions> {
     abstract loginProvider: LoginProvider
     owner: Signer | undefined;
-    web3Auth: ExtendedWeb3Auth | undefined
+    web3Auth: typeof ZeroDevWeb3Auth | undefined
     
     constructor(
         {chains = [], options}: {chains?: Chain[]; options: AbstractWeb3AuthWalletConnectorOptions},
@@ -20,10 +19,11 @@ export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector<A
         super({chains, options})
         this.getChainId().then(chainId => {
             if (this.options.projectIds) {
-                this.web3Auth = new ZeroDevWeb3Auth(this.options.projectIds, chainId as ChainId)
-                const web3AuthInitOptions: ExtendedWeb3AuthInitOptions = {
-                    adapterSettings: options.adapterSettings
-                }
+                const web3AuthInitOptions: ZeroDevWeb3AuthInitOptions = {}
+                this.web3Auth = new ZeroDevWeb3Auth(this.options.projectIds, chainId as ChainId, {
+                    adapterSettings: options.adapterSettings,
+                    web3authOptions: options.web3authOptions
+                })
                 if (
                     getClient().storage?.getItem(`${this.loginProvider}-connecting`)
                     ||

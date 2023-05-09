@@ -1,29 +1,29 @@
 import { AccountParams, ZeroDevConnector } from "./ZeroDevConnector";
-import { ZeroDevWeb3AuthWithModal, ExtendedWeb3AuthWithModal, ExtendedWeb3AuthWithModalInitOptions } from '@zerodevapp/web3auth'
+import { ZeroDevWeb3AuthWithModal, ZeroDevWeb3AuthInitOptions, ZeroDevWeb3AuthOptions } from '@zerodevapp/web3auth'
 import { getRPCProviderOwner } from '@zerodevapp/sdk';
 import { Signer, getClient } from '@wagmi/core';
 import type { Chain } from 'wagmi/chains';
 import { connect } from 'wagmi/actions'
 import { ChainId } from "@zerodevapp/web3auth/dist/types";
-import { OpenloginAdapterOptions } from "@web3auth/openlogin-adapter";
 
-export type SocialWalletConnectorOptions = Omit<Partial<AccountParams>, "owner" | "disconnect"> & {adapterSettings?: OpenloginAdapterOptions['adapterSettings']}
+export type SocialWalletConnectorOptions = Omit<Partial<AccountParams>, "owner" | "disconnect"> & Partial<ZeroDevWeb3AuthOptions>
 
 export abstract class SocialWalletConnector extends ZeroDevConnector<SocialWalletConnectorOptions> {
     loginProvider = 'social'
     id = 'social'
     name = 'Social'
     owner: Signer | undefined;
-    web3Auth: ExtendedWeb3AuthWithModal | undefined
+    web3Auth: typeof ZeroDevWeb3AuthWithModal | undefined
     
     constructor({chains = [], options}: {chains?: Chain[]; options: SocialWalletConnectorOptions}) {
         super({chains, options})
         this.getChainId().then(chainId => {
             if (this.options.projectIds) {
-                this.web3Auth = new ZeroDevWeb3AuthWithModal(this.options.projectIds, chainId as ChainId)
-                const web3AuthInitOptions: ExtendedWeb3AuthWithModalInitOptions = {
-                    adapterSettings: options?.adapterSettings
-                }
+                this.web3Auth = new ZeroDevWeb3AuthWithModal(this.options.projectIds, chainId as ChainId, {
+                    adapterSettings: options.adapterSettings,
+                    web3authOptions: options.web3authOptions
+                })
+                const web3AuthInitOptions: ZeroDevWeb3AuthInitOptions = {}
                 if (
                     getClient().storage?.getItem(`${this.loginProvider}-connecting`)
                     ||
