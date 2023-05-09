@@ -5,8 +5,8 @@ import { Hooks } from '@zerodevapp/sdk/dist/src/ClientConfig'
 import type { Chain } from 'wagmi/chains';
 import { AccountImplementation } from "@zerodevapp/sdk/dist/src/accounts";
 import { BaseAccountAPI, BaseApiParams } from "@zerodevapp/sdk/dist/src/BaseAccountAPI";
-import { CHAIN_ID_TO_INFURA_NAME } from "@zerodevapp/web3auth/dist/constants";
 import { ProjectConfiguration, SupportedGasToken } from "@zerodevapp/sdk/dist/src/types";
+import { ChainId } from "@zerodevapp/web3auth/dist/types";
 
 export type AccountParams = {
     shimDisconnect?: boolean
@@ -75,7 +75,7 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDev
         return this.projectIdChainIdMap[projectId]
     }
 
-    async connect({ chainId }: { chainId: keyof typeof CHAIN_ID_TO_INFURA_NAME }) {
+    async connect({ chainId }: { chainId: ChainId }) {
         this.emit('message', { type: 'connecting' })
         const provider = await this.getProvider()
         const account = await this.getAccount()

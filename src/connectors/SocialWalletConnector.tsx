@@ -4,7 +4,6 @@ import { getRPCProviderOwner } from '@zerodevapp/sdk';
 import { Signer, getClient } from '@wagmi/core';
 import type { Chain } from 'wagmi/chains';
 import { connect } from 'wagmi/actions'
-import { CHAIN_ID_TO_INFURA_NAME } from "@zerodevapp/web3auth/dist/constants";
 import { ChainId } from "@zerodevapp/web3auth/dist/types";
 import { OpenloginAdapterOptions } from "@web3auth/openlogin-adapter";
 
@@ -48,7 +47,7 @@ export abstract class SocialWalletConnector extends ZeroDevConnector<SocialWalle
         return false
     }
 
-    async connect({ chainId }: { chainId: keyof typeof CHAIN_ID_TO_INFURA_NAME }) {
+    async connect({ chainId }: { chainId: ChainId }) {
         if (!this.owner) {
             let provider = this.web3Auth?.provider
             if (this.web3Auth?.status === 'connected' && (await this.web3Auth?.getUserInfo())?.typeOfLogin !== this.loginProvider) {
