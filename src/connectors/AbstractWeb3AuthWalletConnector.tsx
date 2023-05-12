@@ -37,7 +37,7 @@ export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector<A
                         getClient().storage?.setItem(`${this.loginProvider}-connecting`, false)
                     }
                 }
-                this.web3Auth.init(web3AuthInitOptions)
+                this.web3Auth.init(web3AuthInitOptions, this.loginProvider)
             }
         })
     }
@@ -64,6 +64,9 @@ export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector<A
             if (!provider) {
                 getClient().storage?.setItem(`${this.loginProvider}-connecting`, true)
                 provider = await this.web3Auth?.connect(this.loginProvider)
+                setTimeout(() => {
+                    getClient().storage?.setItem(`${this.loginProvider}-connecting`, false)
+                }, 1000)
             }
             this.owner = getRPCProviderOwner(provider)
         }

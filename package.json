@@ -1,6 +1,6 @@
 {
   "name": "@zerodevapp/wagmi",
-  "version": "3.1.6",
+  "version": "3.1.7",
   "main": "dist/index.js",
   "files": [
     "dist",
@@ -9,10 +9,22 @@
     "web3modal"
   ],
   "exports": {
-    ".": "./dist/index.js",
-    "./rainbowkit": "./dist/integrations/rainbowkit/index.js",
-    "./connectkit": "./dist/integrations/connectkit/index.js",
-    "./web3modal": "./dist/integrations/web3modal/index.js"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./rainbowkit": {
+      "types": "./dist/integrations/rainbowkit/index.d.ts",
+      "default": "./dist/integrations/rainbowkit/index.js"
+    },
+    "./connectkit": {
+      "types": "./dist/integrations/connectkit/index.d.ts",
+      "default": "./dist/integrations/connectkit/index.js"
+    },
+    "./web3modal": {
+      "types": "./dist/integrations/web3modal/index.d.ts",
+      "default": "./dist/integrations/web3modal/index.js"
+    }
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -29,8 +41,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zerodevapp/sdk": "3.1.10",
-    "@zerodevapp/web3auth": "3.1.6",
+    "@zerodevapp/sdk": "3.1.12",
+    "@zerodevapp/web3auth": "3.1.7",
     "react": "^18.2.0",
     "wagmi": "^0.12.0"
   },
