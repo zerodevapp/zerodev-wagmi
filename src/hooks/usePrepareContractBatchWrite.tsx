@@ -1,7 +1,7 @@
 import { Contract } from "ethers";
 import { useMemo } from "react";
 import { useSigner } from "wagmi";
-import { usePrepareBatchSendTransaction } from "./usePrepareBatchSendTransaction";
+import { UsePrepareBatchSendTransactionConfig, usePrepareBatchSendTransaction } from "./usePrepareBatchSendTransaction";
 
 export type ContractCall = {
     address: string;
@@ -10,7 +10,7 @@ export type ContractCall = {
     args: any[];
 }
 
-export const usePrepareContractBatchWrite = (config: Omit<Parameters<typeof usePrepareBatchSendTransaction>[0], 'calls'> & {calls: ContractCall[]}) => {
+export const usePrepareContractBatchWrite = (config: Omit<UsePrepareBatchSendTransactionConfig, 'calls'> & {calls: ContractCall[]}) => {
     const {data: signer} = useSigner()
     const calls = useMemo(() => {
         if (config?.calls?.length && Array.isArray(config.calls) && signer) {

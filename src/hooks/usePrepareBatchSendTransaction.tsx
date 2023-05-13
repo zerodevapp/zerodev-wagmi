@@ -33,9 +33,9 @@ function queryKey({
         signerAddress,
         },
     ] as const
-    }
+}
 
-    function queryFn({ signer }: { signer?: FetchSignerResult<ZeroDevSigner> }) {
+function queryFn({ signer }: { signer?: FetchSignerResult<ZeroDevSigner> }) {
     return ({
         queryKey: [{ chainId, calls }],
     }: QueryFunctionArgs<typeof queryKey>) => {
@@ -46,14 +46,14 @@ function queryKey({
             calls,
         })
     }
-    }
-    export function usePrepareBatchSendTransaction({
+}
+export function usePrepareBatchSendTransaction({
         chainId,
         calls,
         cacheTime,
         enabled = true,
         scopeKey,
-        staleTime = 1_000 * 60 * 60 * 24, // 24 hours
+        staleTime,
         suspense,
         onError,
         onSettled,
