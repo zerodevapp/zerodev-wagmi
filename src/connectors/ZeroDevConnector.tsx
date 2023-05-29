@@ -7,14 +7,14 @@ import { AccountImplementation } from "@zerodevapp/sdk/dist/src/accounts";
 import { BaseAccountAPI, BaseApiParams } from "@zerodevapp/sdk/dist/src/BaseAccountAPI";
 import { ProjectConfiguration, SupportedGasToken } from "@zerodevapp/sdk/dist/src/types";
 import { ChainId } from "@zerodevapp/web3auth/dist/types";
-import { JsonRpcProvider } from '@ethersproject/providers'
+import { JsonRpcProvider, FallbackProvider } from '@ethersproject/providers'
 
 export type AccountParams = {
     shimDisconnect?: boolean
     projectId: string
     projectIds?: string[]
     owner: Signer
-    rpcProvider?: JsonRpcProvider
+    rpcProvider?: JsonRpcProvider | FallbackProvider
     bundlerUrl?: string
     implementation?: AccountImplementation<BaseAccountAPI, BaseApiParams>
     hooks?: Hooks
