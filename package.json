@@ -1,6 +1,6 @@
 {
   "name": "@zerodevapp/wagmi",
-  "version": "3.1.19",
+  "version": "3.1.20",
   "main": "dist/index.js",
   "files": [
     "dist",
@@ -42,7 +42,7 @@
   "license": "ISC",
   "dependencies": {
     "@zerodevapp/sdk": "3.1.32",
-    "@zerodevapp/web3auth": "3.1.18",
+    "@zerodevapp/web3auth": "3.1.19",
     "react": "^18.2.0",
     "wagmi": "^0.12.0"
   },
