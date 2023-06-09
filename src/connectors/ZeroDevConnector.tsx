@@ -20,7 +20,8 @@ export type AccountParams = {
     hooks?: Hooks
     disconnect?: () => Promise<any>,
     gasToken?: SupportedGasToken,
-    useWebsocketProvider?: boolean
+    useWebsocketProvider?: boolean,
+    transactionTimeout?: number
 }
 
 export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDevProvider, Options, ZeroDevSigner> {
