@@ -5,7 +5,7 @@ import { Hooks } from '@zerodevapp/sdk/dist/src/ClientConfig'
 import type { Chain } from 'wagmi/chains';
 import { AccountImplementation } from "@zerodevapp/sdk/dist/src/accounts";
 import { BaseAccountAPI, BaseApiParams } from "@zerodevapp/sdk/dist/src/BaseAccountAPI";
-import { ProjectConfiguration, SupportedGasToken } from "@zerodevapp/sdk/dist/src/types";
+import { ProjectConfiguration, SupportedGasToken, PaymasterProvider } from "@zerodevapp/sdk/dist/src/types";
 import { ChainId } from "@zerodevapp/web3auth/dist/types";
 import { JsonRpcProvider, FallbackProvider } from '@ethersproject/providers'
 
@@ -22,6 +22,7 @@ export type AccountParams = {
     gasToken?: SupportedGasToken,
     useWebsocketProvider?: boolean,
     transactionTimeout?: number
+    paymasterProvider?: PaymasterProvider
 }
 
 export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDevProvider, Options, ZeroDevSigner> {
