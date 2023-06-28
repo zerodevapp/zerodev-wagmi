@@ -5,10 +5,19 @@ import { ZeroDevApiService } from '../services/ZeroDevApiService';
 
 export const enhanceConnectorWithAA = (connector: Connector, params: Omit<AccountParams, "owner">) => {
     let provider: ZeroDevProvider | null = null
+    let _wallets: any[]
     const enhancedConnector= new Proxy(connector, {
+        set(target, prop, value, receiver) {
+            if (prop === '_wallets') {
+                return _wallets = value
+            }
+            return Reflect.set(target, prop, value, receiver)
+        },
         get(target, prop, receiver){
+            if (prop === '_wallets') return _wallets
             if (prop === "switchChain") return undefined
-            const value = target[prop as keyof Connector];
+            let value = target[prop as keyof Connector];
+            if (prop === 'id') value += '-zerodev'
             if (value instanceof Function) {
                 return async function (...args: any) {
                     const source = await value.apply(target, args)

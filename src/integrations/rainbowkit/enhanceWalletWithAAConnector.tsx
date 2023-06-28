@@ -5,7 +5,8 @@ import { type AccountParams } from '../../connectors/ZeroDevConnector'
 export const enhanceWalletWithAAConnector = (wallet: Wallet, params: Omit<AccountParams, 'owner'>) => {
     return new Proxy(wallet, {
         get(target, prop, receiver) {
-            const source = Reflect.get(target, prop, receiver)
+            let source = Reflect.get(target, prop, receiver)
+            if (prop === 'id') source += '-zerodev'
             if (prop === "createConnector") {
                 return () => {
                     const result = source()
