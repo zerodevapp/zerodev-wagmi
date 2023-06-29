@@ -1,5 +1,5 @@
 import { Connector, Address } from 'wagmi';
-import { getZeroDevProvider, getRPCProviderOwner, ZeroDevProvider} from '@zerodevapp/sdk';
+import { KernelBaseValidator, KernelSmartContractAccount, ValidatorMode, ZeroDevProvider} from '@zerodevapp/sdk';
 import { AccountParams } from '../connectors/ZeroDevConnector';
 import { ZeroDevApiService } from '../services/ZeroDevApiService';
 
@@ -26,10 +26,28 @@ export const enhanceConnectorWithAA = (connector: Connector, params: Omit<Accoun
                             return (await receiver.getProvider()).chainId
                         case 'getProvider':
                             if (provider === null) {
-                                provider = await getZeroDevProvider({
-                                    ...params,
-                                    owner: getRPCProviderOwner(source),
-                                });
+                                const chainId = await receiver.getChainId()
+                                const chain = connector.chains.find(c => c.id === chainId)
+                                if (!chain) throw new Error('missing chain')
+                                const validator = params.validator ?? new KernelBaseValidator(({
+                                    validatorAddress: "0x180D6465F921C7E0DEA0040107D342c87455fFF5",
+                                    mode: ValidatorMode.sudo,
+                                    owner: source
+                                }))
+                                provider = new ZeroDevProvider({
+                                    projectId: params.projectId,
+                                    chain: await connector.getChainId(),
+                                    entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'
+                                }).connect((rpcClient) => new KernelSmartContractAccount({
+                                    owner: source,
+                                    index: BigInt(0),
+                                    entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
+                                    factoryAddress: '0x5D006d3880645ec6e254E18C1F879DAC9Dd71A39',
+                                    validator,
+                                    defaultValidator: validator,
+                                    rpcClient,
+                                    chain
+                                }))
                             }
                             return provider
                         case 'getSigner':

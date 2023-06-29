@@ -2,8 +2,7 @@ import { Chain } from 'wagmi'
 import { AbstractWeb3AuthWalletConnector, AbstractWeb3AuthWalletConnectorOptions } from './AbstractWeb3AuthWalletConnector'
 import { LoginProvider, ZeroDevWeb3Auth } from '@zerodevapp/web3auth'
 import { ChainId } from '@zerodevapp/web3auth/dist/types'
-import { getClient } from '@wagmi/core'
-import { getRPCProviderOwner } from '@zerodevapp/sdk'
+import { getConfig } from '@wagmi/core'
 
 interface JWTWalletConnectorOptions extends AbstractWeb3AuthWalletConnectorOptions {
     jwt: string
@@ -27,13 +26,13 @@ export class JWTWalletConnector extends AbstractWeb3AuthWalletConnector {
                 provider = null
             }
             if (!provider) {
-                getClient().storage?.setItem(`${this.loginProvider}-connecting`, true)
+                getConfig().storage?.setItem(`${this.loginProvider}-connecting`, true)
                 provider = await this.web3Auth?.connect(this.loginProvider, {jwt: this.jwt})
                 setTimeout(() => {
-                    getClient().storage?.setItem(`${this.loginProvider}-connecting`, false)
+                    getConfig().storage?.setItem(`${this.loginProvider}-connecting`, false)
                 }, 1000)
             }
-            this.owner = getRPCProviderOwner(provider)
+            this.owner = provider
         }
         return await super.connect({ chainId })
     }

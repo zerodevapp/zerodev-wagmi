@@ -1,40 +1,41 @@
 import { Connector } from "wagmi";
-import { Signer, getClient, normalizeChainId } from '@wagmi/core';
-import { ZeroDevProvider, ZeroDevSigner, getProjectsConfiguration, getZeroDevProvider } from '@zerodevapp/sdk'
-import { Hooks } from '@zerodevapp/sdk/dist/src/ClientConfig'
+import { getConfig } from '@wagmi/core';
+import { KernelBaseValidator, KernelSmartContractAccount, ValidatorMode, ZeroDevProvider } from '@zerodevapp/sdk'
 import type { Chain } from 'wagmi/chains';
-import { AccountImplementation } from "@zerodevapp/sdk/dist/src/accounts";
-import { BaseAccountAPI, BaseApiParams } from "@zerodevapp/sdk/dist/src/BaseAccountAPI";
-import { ProjectConfiguration, SupportedGasToken, PaymasterProvider } from "@zerodevapp/sdk/dist/src/types";
 import { ChainId } from "@zerodevapp/web3auth/dist/types";
-import { JsonRpcProvider, FallbackProvider } from '@ethersproject/providers'
+import { normalizeChainId } from "../utilities/normalizeChainId";
+import { ProjectConfiguration } from "../types";
+import { getProjectsConfiguration } from "../utilities/getProjectsConfiguration";
+import { Account, WalletClient, createWalletClient, custom, getAddress } from "viem";
+import { SmartAccountSigner } from "@alchemy/aa-core";
 
 export type AccountParams = {
-    shimDisconnect?: boolean
     projectId: string
-    projectIds?: string[]
-    owner: Signer
-    rpcProvider?: JsonRpcProvider | FallbackProvider
-    bundlerUrl?: string
-    implementation?: AccountImplementation<BaseAccountAPI, BaseApiParams>
-    hooks?: Hooks
+    owner: SmartAccountSigner
+    validator?: KernelBaseValidator
+
+    shimDisconnect?: boolean
     disconnect?: () => Promise<any>,
-    gasToken?: SupportedGasToken,
-    useWebsocketProvider?: boolean,
-    transactionTimeout?: number
-    paymasterProvider?: PaymasterProvider
+    projectIds?: string[]
+    // index?: BigInt,
+    // rpcProvider?: JsonRpcProvider | FallbackProvider
+    // bundlerUrl?: string
+    // gasToken?: SupportedGasToken,
+    // useWebsocketProvider?: boolean,
+    // transactionTimeout?: number
+    // paymasterProvider?: PaymasterProvider
 }
 
-export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDevProvider, Options, ZeroDevSigner> {
+export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDevProvider, Options> {
     provider: ZeroDevProvider | null = null
+    walletClient: any | null = null
     id = 'zeroDev'
     name = 'Zero Dev'
     ready: boolean = true
     projectsConfiguration?: Promise<ProjectConfiguration>
     projects?: Array<{id: string, chainId: number}>
-    originalProvider?: ZeroDevProvider
-    chainIdProjectIdMap: {[key: number]: string}
-    projectIdChainIdMap: {[key: string]: number}
+    chainIdProjectIdMap: {[key: number]: string} = {}
+    projectIdChainIdMap: {[key: string]: number} = {}
     protected shimDisconnectKey = `${this.id}.shimDisconnect`
     
 
@@ -44,8 +45,6 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDev
         if (options.projectId && !options.projectIds) options.projectIds = [options.projectId]
         super({chains, options: options as Options})
         this.getProjectsConfiguration()
-        this.chainIdProjectIdMap = {}
-        this.projectIdChainIdMap = {}
     }
 
     async getProjectsConfiguration() {
@@ -84,7 +83,7 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDev
         const provider = await this.getProvider()
         const account = await this.getAccount()
         const id = await this.getChainId()
-        if ((await this.getOptions()).shimDisconnect) getClient().storage?.setItem(this.shimDisconnectKey, true)
+        if ((await this.getOptions()).shimDisconnect) getConfig().storage?.setItem(this.shimDisconnectKey, true)
 
         return {
             account,
@@ -94,13 +93,40 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDev
     }
 
     async getOptions(): Promise<AccountParams> {
+        const options = this.options as AccountParams
+        if (!options.validator && options.owner) {
+            options.validator = new KernelBaseValidator(({
+                validatorAddress: "0x180D6465F921C7E0DEA0040107D342c87455fFF5",
+                mode: ValidatorMode.sudo,
+                owner: options.owner
+            }))
+        }
         return this.options as AccountParams
     }
 
     async getProvider() {
         if (this.provider === null) {
-            this.provider = await getZeroDevProvider(await this.getOptions())
-            if (!this.originalProvider) this.originalProvider = this.provider
+            const currentChainId = await this.getChainId()
+            if (!currentChainId) throw Error('Cannot find chain')
+            const chain = this.chains.find(chain => chain.id === currentChainId)
+            if (!chain) throw Error('Cannot find chain')
+
+            const options = await this.getOptions()
+            this.provider = new ZeroDevProvider({
+                chain: this.projectIdChainIdMap[options.projectId],
+                projectId: options.projectId,
+                entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'
+            }).connect((rpcClient) => new KernelSmartContractAccount({
+                owner: options.owner,
+                index: BigInt(0),
+                entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
+                factoryAddress: '0x5D006d3880645ec6e254E18C1F879DAC9Dd71A39',
+                validator: options.validator!,
+                defaultValidator: options.validator!,
+                rpcClient,
+                chain
+            })).withZeroDevPaymasterAndData({policy: 'VERIFYING_PAYMASTER'})
+
         }
         return this.provider
     }
@@ -110,7 +136,7 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDev
             if (
                 !(await this.getOptions()).shimDisconnect ||
                 // If shim does not exist in storage, wallet is disconnected
-                !getClient().storage?.getItem(this.shimDisconnectKey)
+                !getConfig().storage?.getItem(this.shimDisconnectKey)
             )
                 return false
             const account = await this.getAccount()
@@ -121,21 +147,32 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDev
     }
 
     async getChainId() {
-        if (this.provider === null) {
-            const options = await this.getOptions()
-            const chainId = await this.getChainIdFromProjectId(options.projectId)
-            if (!chainId) return this.chains[0].id
-            return chainId
-        }
-        return (await this.getProvider()).chainId
+        const options = await this.getOptions()
+        const chainId = await this.getChainIdFromProjectId(options.projectId)
+        if (!chainId) return this.chains[0].id
+        return chainId
     }
 
-    async getSigner() {
-        return (await this.getProvider())?.getSigner()
+    async getWalletClient({ chainId }: { chainId?: number } = {}) {
+        if (!this.walletClient) {
+            const provider = await this.getProvider()
+            if (!provider) throw new Error('provider is required')
+            const chain = this.chains.find((x) => x.id === chainId)
+            if (!chain) throw new Error('chain is wrong')
+            this.walletClient = createWalletClient({
+                account: await this.getAccount(),
+                chain: chain,
+                transport: custom(provider)
+            })
+        }
+        return this.walletClient
     }
     async getAccount() {
-        return (await (await this.getSigner())?.getAddress()) as '0x{string}';
+        const provider = await this.getProvider()
+        if (!provider) throw new Error('provider is required')
+        return await provider.getAddress()
     }
+
 
     protected isChainUnsupported(chainId: number) {
         return !this.getProjectIdFromChainId(chainId)
@@ -147,7 +184,7 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDev
         if (options.disconnect) {
             await options.disconnect()
         }
-        if ((await this.getOptions()).shimDisconnect) getClient().storage?.removeItem(this.shimDisconnectKey)
+        if ((await this.getOptions()).shimDisconnect) getConfig().storage?.removeItem(this.shimDisconnectKey)
     }
 
     async switchChain(chainId: number) {
@@ -161,7 +198,6 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDev
             options.projectId = projectId
             await this.getProvider()
             this.emit("change", { chain: { id: chainId, unsupported: false } });
-            this.originalProvider?.emit("chainChanged")
             return chain;
         } catch (error) {
             throw error;
@@ -183,7 +219,7 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDev
         this.getOptions().then((options => {
             if (options.disconnect) {
                 options.disconnect()
-                if (options.shimDisconnect) getClient().storage?.removeItem(this.shimDisconnectKey)
+                if (options.shimDisconnect) getConfig().storage?.removeItem(this.shimDisconnectKey)
                 this.provider = null
             }
         }))

@@ -133,3 +133,13 @@ export type GetArgs<
     blockTag?: ethers.CallOverrides['blockTag']
     from?: Address
   } 
+
+  export interface ProjectConfiguration {
+    projects: Array<{id: string, chainId: number}>
+    signature?: string
+    authenticationProviders: Array<{
+      config: any
+      provider: string
+      verifierId: string | null
+    }>
+}
