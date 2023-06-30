@@ -1,10 +1,12 @@
 import { Connector, Address } from 'wagmi';
-import { KernelBaseValidator, KernelSmartContractAccount, ValidatorMode, ZeroDevProvider} from '@zerodevapp/sdk';
+import { ECDSAValidator, KernelSmartContractAccount, ValidatorMode, ZeroDevProvider} from '@zerodevapp/sdk';
 import { AccountParams } from '../connectors/ZeroDevConnector';
 import { ZeroDevApiService } from '../services/ZeroDevApiService';
+import { createWalletClient, custom } from 'viem';
 
 export const enhanceConnectorWithAA = (connector: Connector, params: Omit<AccountParams, "owner">) => {
     let provider: ZeroDevProvider | null = null
+    let walletClient: any | null = null
     const enhancedConnector= new Proxy(connector, {
         get(target, prop, receiver){
             if (prop === "switchChain") return undefined
@@ -26,20 +28,32 @@ export const enhanceConnectorWithAA = (connector: Connector, params: Omit<Accoun
                             return (await receiver.getProvider()).chainId
                         case 'getProvider':
                             if (provider === null) {
+                                const address = await source.getAddress()
+                                const owner = {
+                                    getAddress: async () => address,
+                                    signMessage: async (message: string | Uint8Array) =>  {
+                                        return source.getSigner().signMessage({
+                                            account: address, 
+                                            message: typeof message === 'string' ? message : {raw: message}
+                                        })
+                                    }
+                                }
                                 const chainId = await receiver.getChainId()
                                 const chain = connector.chains.find(c => c.id === chainId)
                                 if (!chain) throw new Error('missing chain')
-                                const validator = params.validator ?? new KernelBaseValidator(({
+                                const validator = params.validator ? params.validator(owner, chain) : new ECDSAValidator(({
                                     validatorAddress: "0x180D6465F921C7E0DEA0040107D342c87455fFF5",
                                     mode: ValidatorMode.sudo,
-                                    owner: source
+                                    owner,
+                                    chain,
+                                    entryPointAddress: "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789"
                                 }))
                                 provider = new ZeroDevProvider({
                                     projectId: params.projectId,
                                     chain: await connector.getChainId(),
                                     entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'
                                 }).connect((rpcClient) => new KernelSmartContractAccount({
-                                    owner: source,
+                                    owner,
                                     index: BigInt(0),
                                     entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
                                     factoryAddress: '0x5D006d3880645ec6e254E18C1F879DAC9Dd71A39',
@@ -50,8 +64,16 @@ export const enhanceConnectorWithAA = (connector: Connector, params: Omit<Accoun
                                 }))
                             }
                             return provider
-                        case 'getSigner':
-                            return await (await receiver.getProvider()).getSigner()
+                        case 'getWalletClient':
+                            if (!walletClient) {
+                                if (!provider) throw new Error('provider is required')
+                                walletClient = createWalletClient({
+                                    account: await receiver.getAccount(),
+                                    chain: await receiver.getChain(),
+                                    transport: custom(provider)
+                                })
+                            }
+                            return walletClient
                         case 'getAccount':
                             return await (await receiver.getSigner()).getAddress() as Address
                         case 'disconnect':

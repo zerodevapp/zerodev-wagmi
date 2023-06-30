@@ -70,26 +70,31 @@ export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector {
                 }, 1000)
             }
             const walletClient = createWalletClient({
-                chain: this.chains.find(chain => chain.id === chainId),
+                chain: await this.getChain(),
                 transport: custom(provider)
             })
             const address = (await walletClient.getAddresses())[0]
             this.owner = {
                 getAddress: async () => address,
-                signMessage: async (message: string | Uint8Array) =>  walletClient.signMessage({account: address, message: typeof message === 'string' ? message : {raw: message}})
+                signMessage: async (message: string | Uint8Array) =>  {
+                    return walletClient.signMessage({
+                        account: address, 
+                        message: typeof message === 'string' ? message : {raw: message}
+                    })
+                }
             }
         }
         return await super.connect({ chainId })
     }
 
     async getOptions() {
+        if (this.owner) {
+            this.options.owner = this.owner
+        }
         const options = await super.getOptions()
         options.disconnect = async () => {
             await this.web3Auth?.logout()
             this.owner = undefined
-        }
-        if (this.owner) {
-            options.owner = this.owner
         }
         return options
     }
