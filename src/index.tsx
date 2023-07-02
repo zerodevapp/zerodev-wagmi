@@ -9,3 +9,8 @@ export { TwitchSocialWalletConnector } from './connectors/TwitchSocialWalletConn
 export { TwitterSocialWalletConnector } from './connectors/TwitterSocialWalletConnector';
 export { JWTWalletConnector } from './connectors/JWTWalletConnector';
 export { Auth0WalletConnector } from './connectors/Auth0WalletConnector';
+
+export { prepareSendUserOperation } from './core/prepareSendUserOperation'
+export { sendUserOperation } from './core/sendUserOperation'
+export { usePrepareSendUserOperation } from './hooks/usePrepareSendUserOperation'
+export { useSendUserOperation } from './hooks/useSendUserOperation'

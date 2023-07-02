@@ -175,6 +175,8 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDev
                 chain: await this.getChain(),
                 transport: custom(provider)
             })
+            this.walletClient.sendUserOperation = provider.sendUserOperation.bind(provider)
+            this.walletClient.waitForUserOperationTransaction = provider.waitForUserOperationTransaction.bind(provider)
         }
         return this.walletClient
     }
