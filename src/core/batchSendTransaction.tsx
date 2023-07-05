@@ -7,7 +7,7 @@ import { assertActiveChain } from '../utilities/assertActiveChain'
 
 export type BatchSendTransactionPreparedRequest = {
   mode: 'prepared'
-  request: Pick<providers.TransactionRequest, 'data' | 'gasLimit'>,
+  request: Pick<providers.TransactionRequest, 'data' | 'gasLimit' | 'gasPrice' | 'maxFeePerGas' | 'maxPriorityFeePerGas'>,
 }
 export type BatchSendTransactionUnpreparedRequest = {
   mode: 'recklesslyUnprepared'

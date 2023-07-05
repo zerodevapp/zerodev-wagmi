@@ -22,6 +22,7 @@ function queryKey({
     calls,
     scopeKey,
     signerAddress,
+    request
 }: QueryKeyArgs & QueryKeyConfig) {
     return [
         {
@@ -31,19 +32,21 @@ function queryKey({
         calls,
         scopeKey,
         signerAddress,
+        request
         },
     ] as const
 }
 
 function queryFn({ signer }: { signer?: FetchSignerResult<ZeroDevSigner> }) {
     return ({
-        queryKey: [{ chainId, calls }],
+        queryKey: [{ chainId, calls, request }],
     }: QueryFunctionArgs<typeof queryKey>) => {
         if (!calls) throw new Error('calls is required')
         return prepareBatchSendTransaction({
             chainId,
             signer,
             calls,
+            request
         })
     }
 }
@@ -58,6 +61,7 @@ export function usePrepareBatchSendTransaction({
         onError,
         onSettled,
         onSuccess,
+        request
     }: UsePrepareBatchSendTransactionConfig = {}) {
     const { chain: activeChain } = useNetwork()
     const { data: signer } = useSigner<ZeroDevSigner>({ chainId })
@@ -69,6 +73,7 @@ export function usePrepareBatchSendTransaction({
             calls,
             scopeKey,
             signerAddress: signer?.address,
+            request
         }),
         queryFn({ signer }),
         {

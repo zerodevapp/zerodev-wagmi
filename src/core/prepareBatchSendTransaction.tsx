@@ -11,17 +11,19 @@ export type PrepareBatchSendTransactionArgs<TSigner extends ZeroDevSigner = Zero
   chainId?: number
   calls: Call[],
   signer?: TSigner | null
+  request?: Pick<providers.TransactionRequest, 'gasLimit' | 'gasPrice' | 'maxFeePerGas' | 'maxPriorityFeePerGas'>,
 }
 
 export type PrepareBatchSendTransactionResult = {
   chainId?: number
-  request: Pick<providers.TransactionRequest, 'data' | 'gasLimit'>,
+  request: Pick<providers.TransactionRequest, 'data' | 'gasLimit' | 'gasPrice' | 'maxFeePerGas' | 'maxPriorityFeePerGas'>,
   mode: 'prepared'
 }
 export async function prepareBatchSendTransaction<TSigner extends ZeroDevSigner = ZeroDevSigner,>({
   chainId,
   signer: signer_,
-  calls
+  calls,
+  request = {}
 }: PrepareBatchSendTransactionArgs<TSigner>): Promise<PrepareBatchSendTransactionResult> {
   const signer = signer_ ?? (await fetchSigner<ZeroDevSigner>({ chainId }));
   if (!signer) throw new ConnectorNotFoundError();
@@ -30,15 +32,16 @@ export async function prepareBatchSendTransaction<TSigner extends ZeroDevSigner 
     assertActiveChain({ chainId, signer });
   }
 
-  const request = await signer.getExecBatchTransaction(calls) as Promise<TransactionRequest>;
-  const gasLimit = (await signer.estimateGas(request as Deferrable<TransactionRequest>, ExecuteType.EXECUTE_BATCH));
+  const transactionRequest = await signer.getExecBatchTransaction(calls) as Promise<TransactionRequest>;
+  const gasLimit = (await signer.estimateGas(transactionRequest as Deferrable<TransactionRequest>, ExecuteType.EXECUTE_BATCH));
 
   return {
     chainId,
     mode: 'prepared',
     request: {
-      ...request, 
-      gasLimit
+      ...request,
+      gasLimit,
+      ...transactionRequest,
     }
   };
 }
