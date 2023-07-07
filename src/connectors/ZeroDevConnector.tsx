@@ -1,19 +1,16 @@
 import { Connector } from "wagmi";
 import { getConfig } from '@wagmi/core';
-import { KernelBaseValidator, ECDSAValidator, KernelSmartContractAccount, ValidatorMode, ZeroDevProvider } from '@zerodevapp/sdk'
+import { ECDSAProvider } from '@zerodevapp/sdk'
 import type { Chain } from 'wagmi/chains';
-import * as chains from 'viem/chains'
-import { ChainId } from "@zerodevapp/web3auth/dist/types";
 import { normalizeChainId } from "../utilities/normalizeChainId";
 import { ProjectConfiguration } from "../types";
 import { getProjectsConfiguration } from "../utilities/getProjectsConfiguration";
-import { Account, WalletClient, createWalletClient, custom, getAddress } from "viem";
+import { createWalletClient, custom } from "viem";
 import { SmartAccountSigner } from "@alchemy/aa-core";
 
 export type AccountParams = {
     projectId: string
     owner: SmartAccountSigner
-    validator?: (owner: SmartAccountSigner, chain: Chain) => KernelBaseValidator
 
     shimDisconnect?: boolean
     disconnect?: () => Promise<any>,
@@ -27,8 +24,8 @@ export type AccountParams = {
     // paymasterProvider?: PaymasterProvider
 }
 
-export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDevProvider, Options> {
-    provider: ZeroDevProvider | null = null
+export class ZeroDevConnector<Options = AccountParams> extends Connector<ECDSAProvider, Options> {
+    provider: ECDSAProvider | null = null
     walletClient: any | null = null
     id = 'zeroDev'
     name = 'Zero Dev'
@@ -79,7 +76,8 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDev
         return this.projectIdChainIdMap[projectId]
     }
 
-    async connect({ chainId }: { chainId: ChainId }) {
+    //@ts-expect-error
+    async connect({ chainId }) {
         this.emit('message', { type: 'connecting' })
         const provider = await this.getProvider()
         const account = await this.getAccount()
@@ -94,40 +92,21 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDev
     }
 
     async getOptions(): Promise<AccountParams> {
-        const options = this.options as AccountParams
-        if (!options.validator && options.owner) {
-            options.validator = (owner, chain) =>  new ECDSAValidator(({
-                validatorAddress: "0x180D6465F921C7E0DEA0040107D342c87455fFF5",
-                mode: ValidatorMode.sudo,
-                owner,
-                chain,
-                entryPointAddress: "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789"
-            }))
-        }
         return this.options as AccountParams
     }
 
     async getProvider() {
         if (this.provider === null) {
             const options = await this.getOptions()
-            const chain = await this.getChain()
-            const validator = options.validator!(options.owner, chain)
-            this.provider = new ZeroDevProvider({
-                chain,
+            this.provider = await ECDSAProvider.init({
                 projectId: options.projectId,
-                entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'
-            }).connect((rpcClient) => {
-                console.log(rpcClient)
-                return new KernelSmartContractAccount({
                 owner: options.owner,
-                index: BigInt(0),
-                entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
-                factoryAddress: '0x5D006d3880645ec6e254E18C1F879DAC9Dd71A39',
-                validator,
-                defaultValidator: validator,
-                rpcClient,
-                chain
-            })}).withZeroDevPaymasterAndData({policy: 'VERIFYING_PAYMASTER'})
+                opts: {
+                    paymasterConfig: {
+                        policy: "VERIFYING_PAYMASTER"
+                    }
+                }
+            });
             //@ts-expect-error
             this.provider.on = () => {}
             //@ts-expect-error

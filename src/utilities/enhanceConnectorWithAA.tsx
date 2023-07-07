@@ -1,5 +1,5 @@
 import { Connector, Address } from 'wagmi';
-import { ECDSAValidator, KernelSmartContractAccount, ValidatorMode, ZeroDevProvider} from '@zerodevapp/sdk';
+import { ECDSAProvider, ECDSAValidator, KernelSmartContractAccount, ValidatorMode, ZeroDevProvider} from '@zerodevapp/sdk';
 import { AccountParams } from '../connectors/ZeroDevConnector';
 import { ZeroDevApiService } from '../services/ZeroDevApiService';
 import { createWalletClient, custom } from 'viem';
@@ -41,27 +41,10 @@ export const enhanceConnectorWithAA = (connector: Connector, params: Omit<Accoun
                                 const chainId = await receiver.getChainId()
                                 const chain = connector.chains.find(c => c.id === chainId)
                                 if (!chain) throw new Error('missing chain')
-                                const validator = params.validator ? params.validator(owner, chain) : new ECDSAValidator(({
-                                    validatorAddress: "0x180D6465F921C7E0DEA0040107D342c87455fFF5",
-                                    mode: ValidatorMode.sudo,
-                                    owner,
-                                    chain,
-                                    entryPointAddress: "0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789"
-                                }))
-                                provider = new ZeroDevProvider({
+                                provider = await ECDSAProvider.init({
                                     projectId: params.projectId,
-                                    chain: await connector.getChainId(),
-                                    entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789'
-                                }).connect((rpcClient) => new KernelSmartContractAccount({
                                     owner,
-                                    index: BigInt(0),
-                                    entryPointAddress: '0x5FF137D4b0FDCD49DcA30c7CF57E578a026d2789',
-                                    factoryAddress: '0x5D006d3880645ec6e254E18C1F879DAC9Dd71A39',
-                                    validator,
-                                    defaultValidator: validator,
-                                    rpcClient,
-                                    chain
-                                }))
+                                })
                             }
                             return provider
                         case 'getWalletClient':

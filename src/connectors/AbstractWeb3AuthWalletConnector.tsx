@@ -3,7 +3,6 @@ import { ZeroDevWeb3Auth, type ZeroDevWeb3AuthOptions, type LoginProvider, type 
 import { getConfig } from '@wagmi/core';
 import type { Chain } from 'wagmi/chains';
 import { connect } from 'wagmi/actions'
-import { ChainId } from "@zerodevapp/web3auth/dist/types";
 import { SmartAccountSigner } from "@alchemy/aa-core";
 import { createWalletClient, custom } from "viem";
 
@@ -21,7 +20,7 @@ export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector {
         this.getChainId().then(chainId => {
             if (this.options.projectIds) {
                 const web3AuthInitOptions: ZeroDevWeb3AuthInitOptions = {}
-                this.web3Auth = new ZeroDevWeb3Auth(this.options.projectIds, chainId as ChainId, {
+                this.web3Auth = new ZeroDevWeb3Auth(this.options.projectIds, chainId, {
                     adapterSettings: options.adapterSettings,
                     web3authOptions: options.web3authOptions
                 })
@@ -55,7 +54,8 @@ export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector {
         return super.isAuthorized()
     }
 
-    async connect({ chainId }: { chainId: ChainId }) {
+    //@ts-expect-error
+    async connect({ chainId }) {
         if (!this.owner) {
             let provider = this.web3Auth?.provider
             if (this.web3Auth?.status === 'connected' && (await this.web3Auth?.getUserInfo())?.typeOfLogin !== this.loginProvider) {
