@@ -104,7 +104,7 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ECDSAPr
                 opts: {
                     paymasterConfig: {
                         policy: "VERIFYING_PAYMASTER"
-                    }
+                    },
                 }
             });
             //@ts-expect-error

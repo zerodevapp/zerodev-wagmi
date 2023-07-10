@@ -5,6 +5,7 @@ import type { Chain } from 'wagmi/chains';
 import { connect } from 'wagmi/actions'
 import { SmartAccountSigner } from "@alchemy/aa-core";
 import { createWalletClient, custom } from "viem";
+import { convertWalletClientToAccountSigner } from '@zerodevapp/sdk'
 
 export type AbstractWeb3AuthWalletConnectorOptions = Omit<Partial<AccountParams>, "owner" | "disconnect"> & Partial<ZeroDevWeb3AuthOptions>
 
@@ -83,6 +84,11 @@ export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector {
                     })
                 }
             }
+            // const walletClient = createWalletClient({
+            //     chain: await this.getChain(),
+            //     transport: custom(provider)
+            // })
+            // this.owner = convertWalletClientToAccountSigner(walletClient)
         }
         return await super.connect({ chainId })
     }

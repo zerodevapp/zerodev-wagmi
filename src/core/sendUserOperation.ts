@@ -100,10 +100,8 @@ export async function sendUserOperation({
     } 
   }
 
-  console.log(args)
-
   //@ts-expect-error
-  const userOpHash = await walletClient.sendUserOperation(isArray ? args.to.map((target, index) => ({
+  const { hash } = await walletClient.sendUserOperation(isArray ? args.to.map((target, index) => ({
     target,
     data: args.data && Array.isArray(args.data) ? args.data[index] : undefined,
     value: args.value && Array.isArray(args.value) ? args.value[index] : undefined
@@ -114,12 +112,5 @@ export async function sendUserOperation({
   })
 
   //@ts-expect-error
-  const hash = await walletClient.waitForUserOperationTransaction(userOpHash as Hash);
-
-  /********************************************************************/
-  /** END: iOS App Link cautious code.                                */
-  /** Go nuts!                                                        */
-  /********************************************************************/
-
-  return { hash }
+  return { hash: await walletClient.waitForUserOperationTransaction(hash) }
 }

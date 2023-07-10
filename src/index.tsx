@@ -14,3 +14,5 @@ export { prepareSendUserOperation } from './core/prepareSendUserOperation'
 export { sendUserOperation } from './core/sendUserOperation'
 export { usePrepareSendUserOperation } from './hooks/usePrepareSendUserOperation'
 export { useSendUserOperation } from './hooks/useSendUserOperation'
+export { usePrepareContractBatchWrite } from './hooks/usePrepareContractBatchWrite';
+export { useContractBatchWrite } from './hooks/useContractBatchWrite';
