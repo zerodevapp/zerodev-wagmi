@@ -117,6 +117,15 @@
     "@ethereumjs/util" "^8.0.6"
     ethereum-cryptography "^2.0.0"
 
+"@ethereumjs/util@^8.0.0":
+  version "8.1.0"
+  resolved "https://registry.yarnpkg.com/@ethereumjs/util/-/util-8.1.0.tgz#299df97fb6b034e0577ce9f94c7d9d1004409ed4"
+  integrity sha512-zQ0IqbdX8FZ9aw11vP+dZkKDkS+kgIvQPHnSAXzP9pLu+Rfu3D3XEeLbicvoXJTYnhZiPmsZUxgdzXwNKxRPbA==
+  dependencies:
+    "@ethereumjs/rlp" "^4.0.1"
+    ethereum-cryptography "^2.0.0"
+    micro-ftch "^0.3.1"
+
 "@ethereumjs/util@^8.0.5", "@ethereumjs/util@^8.0.6":
   version "8.0.6"
   resolved "https://registry.yarnpkg.com/@ethereumjs/util/-/util-8.0.6.tgz#f9716ed34235ea05eff8353bc5d483e5a6455989"
@@ -558,6 +567,18 @@
   resolved "https://registry.yarnpkg.com/@metamask/detect-provider/-/detect-provider-2.0.0.tgz#4bc2795e5e6f7d8b84b2e845058d2f222c99917d"
   integrity sha512-sFpN+TX13E9fdBDh9lvQeZdJn4qYoRb/6QF2oZZK/Pn559IhCFacPMU1rMuqyXoFQF3JSJfii2l98B87QDPeCQ==
 
+"@metamask/eth-sig-util@5.0.2":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@metamask/eth-sig-util/-/eth-sig-util-5.0.2.tgz#c518279a6e17a88135a13d53a0b970f145ff8bce"
+  integrity sha512-RU6fG/H6/UlBol221uBkq5C7w3TwLK611nEZliO2u+kO0vHKGBXnIPlhI0tzKUigjhUeOd9mhCNbNvhh0LKt9Q==
+  dependencies:
+    "@ethereumjs/util" "^8.0.0"
+    bn.js "^4.11.8"
+    ethereum-cryptography "^1.1.2"
+    ethjs-util "^0.1.6"
+    tweetnacl "^1.0.3"
+    tweetnacl-util "^0.15.1"
+
 "@metamask/eth-sig-util@^5.0.2":
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/@metamask/eth-sig-util/-/eth-sig-util-5.0.3.tgz#c0a984d873b6d0c46d0266d1e491431101b2de41"
@@ -565,18 +586,6 @@
   dependencies:
     "@ethereumjs/util" "^8.0.6"
     bn.js "^4.11.8"
-    ethereum-cryptography "^2.0.0"
-    ethjs-util "^0.1.6"
-    tweetnacl "^1.0.3"
-    tweetnacl-util "^0.15.1"
-
-"@metamask/eth-sig-util@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@metamask/eth-sig-util/-/eth-sig-util-5.1.0.tgz#a47f62800ee1917fef976ba67544a0ccd7d1bd6b"
-  integrity sha512-mlgziIHYlA9pi/XZerChqg4NocdOgBPB9NmxgXWQO2U2hH8RGOJQrz6j/AIKkYxgCMIE2PY000+joOwXfzeTDQ==
-  dependencies:
-    "@ethereumjs/util" "^8.0.6"
-    bn.js "^4.12.0"
     ethereum-cryptography "^2.0.0"
     ethjs-util "^0.1.6"
     tweetnacl "^1.0.3"
@@ -686,12 +695,17 @@
   resolved "https://registry.yarnpkg.com/@noble/ed25519/-/ed25519-1.7.3.tgz#57e1677bf6885354b466c38e2b620c62f45a7123"
   integrity sha512-iR8GBkDt0Q3GyaVcIu7mSsVIqnFbkbRzGLWlvhwunacoLwt4J3swfKhfaM6rN6WY+TBGoYT1GtT1mIh2/jGbRQ==
 
+"@noble/hashes@1.2.0", "@noble/hashes@~1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.2.0.tgz#a3150eeb09cc7ab207ebf6d7b9ad311a9bdbed12"
+  integrity sha512-FZfhjEDbT5GRswV3C6uvLPHMiVD6lQBmpoX5+eSiPaMTXte/IKqI5dykDxzZB/WBeK/CDuQRBWarPdi3FNY2zQ==
+
 "@noble/hashes@1.3.0", "@noble/hashes@^1.1.2", "@noble/hashes@^1.3.0", "@noble/hashes@~1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.3.0.tgz#085fd70f6d7d9d109671090ccae1d3bec62554a1"
   integrity sha512-ilHEACi9DwqJB0pw7kv+Apvh50jiiSyR/cQ3y4W7lOR5mhvn/50FLUfsnfJz0BDZtl/RR16kXvptiv6q1msYZg==
 
-"@noble/secp256k1@^1.6.3":
+"@noble/secp256k1@1.7.1", "@noble/secp256k1@^1.6.3", "@noble/secp256k1@~1.7.0":
   version "1.7.1"
   resolved "https://registry.yarnpkg.com/@noble/secp256k1/-/secp256k1-1.7.1.tgz#b251c70f824ce3ca7f8dc3df08d58f005cc0507c"
   integrity sha512-hOUk6AyBFmqVrv7k5WAw/LpszxVbj9gGN4JRkIX52fdFAj1UA61KXmZDvqVEm+pOyec3+fIeZB02LYa/pWOArw==
@@ -763,6 +777,15 @@
   resolved "https://registry.yarnpkg.com/@scure/base/-/base-1.1.1.tgz#ebb651ee52ff84f420097055f4bf46cfba403938"
   integrity sha512-ZxOhsSyxYwLJj3pLZCefNitxsj093tb2vq90mp2txoYeBqbcjDjqFhyM8eUjq/uFm6zJ+mUuqxlS2FkuSY1MTA==
 
+"@scure/bip32@1.1.5":
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/@scure/bip32/-/bip32-1.1.5.tgz#d2ccae16dcc2e75bc1d75f5ef3c66a338d1ba300"
+  integrity sha512-XyNh1rB0SkEqd3tXcXMi+Xe1fvg+kUIcoRIEujP1Jgv7DqW2r9lg3Ah0NkFaCs9sTkQAQA8kw7xiRXzENi9Rtw==
+  dependencies:
+    "@noble/hashes" "~1.2.0"
+    "@noble/secp256k1" "~1.7.0"
+    "@scure/base" "~1.1.0"
+
 "@scure/bip32@1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@scure/bip32/-/bip32-1.3.0.tgz#6c8d980ef3f290987736acd0ee2e0f0d50068d87"
@@ -770,6 +793,14 @@
   dependencies:
     "@noble/curves" "~1.0.0"
     "@noble/hashes" "~1.3.0"
+    "@scure/base" "~1.1.0"
+
+"@scure/bip39@1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@scure/bip39/-/bip39-1.1.1.tgz#b54557b2e86214319405db819c4b6a370cf340c5"
+  integrity sha512-t+wDck2rVkh65Hmv280fYdVdY25J9YeEUIgn2LG1WM6gxFkGzcksoDiUkWVpVp3Oex9xGC68JU2dSbUfwZ2jPg==
+  dependencies:
+    "@noble/hashes" "~1.2.0"
     "@scure/base" "~1.1.0"
 
 "@scure/bip39@1.2.0":
@@ -2024,11 +2055,20 @@
   resolved "https://registry.yarnpkg.com/@zerodevapp/contracts/-/contracts-2.0.8.tgz#b9e6164a032a3128428935f96440cc72f44b0e65"
   integrity sha512-o76jzJPJ2nb2zR72jP+R8AzFuEEAqtjPdMOKaQ9Jl/5XPf6CIAX6BjExFKNhJkuNOHhnoWuNABOlwfIifLGHvA==
 
-"@zerodevapp/sdk@3.1.5":
-  version "3.1.5"
-  resolved "https://registry.yarnpkg.com/@zerodevapp/sdk/-/sdk-3.1.5.tgz#31c9a90a9f74cd66b8d6c2a782ac7a0a41f43d30"
-  integrity sha512-GWc9c/AxDq+j9FatTD4LWj5BhVVo+QXjOA4+2c9CUzivhc1miq2Bxc3KcD6JrWjnNaNm8LZjvOWNw/FLY5KoeQ==
+"@zerodevapp/kernel-contracts-v2@npm:@zerodevapp/contracts@^4.0.0-beta.15":
+  version "4.0.0-beta.15"
+  resolved "https://registry.yarnpkg.com/@zerodevapp/contracts/-/contracts-4.0.0-beta.15.tgz#7baa762d1a67bf8d3cde31c43c60c4955aae6fd6"
+  integrity sha512-NtNvINg2nzE5ZyskvJtMQjm2XMc26GNcHEsDkDxs6cEAnRomsBb7J8EdniJbF+8xYqszuBGCzwG9fxe6fFYKLw==
   dependencies:
+    "@account-abstraction/contracts" "^0.6.0"
+    dotenv "^16.0.3"
+
+"@zerodevapp/sdk@3.1.52":
+  version "3.1.52"
+  resolved "https://registry.yarnpkg.com/@zerodevapp/sdk/-/sdk-3.1.52.tgz#f2f79ab48417938dedd7d1f19f15400434320d22"
+  integrity sha512-Cq/ZGDs7F4wmE8WYFNYvm07gjkP/XJ4ZAYR5ClbzvRm24BE8N4lCX/hBExoU/YdkcUbBqeEdaclZh9Zckiz3CQ==
+  dependencies:
+    "@account-abstraction/contracts" "^0.6.0"
     "@account-abstraction/utils" "^0.4.0"
     "@ambire/signature-validator" "^1.3.0"
     "@ethersproject/abstract-provider" "^5.7.0"
@@ -2037,26 +2077,27 @@
     "@ethersproject/properties" "^5.7.0"
     "@ethersproject/providers" "^5.7.0"
     "@ethersproject/shims" "^5.7.0"
-    "@metamask/eth-sig-util" "^5.1.0"
+    "@metamask/eth-sig-util" "5.0.2"
     "@openzeppelin/contracts" "^4.8.2"
     "@types/debug" "^4.1.7"
     "@zerodevapp/contracts" "^2.0.8"
     "@zerodevapp/contracts-new" "npm:@zerodevapp/contracts@^3.0.0-rc.5"
+    "@zerodevapp/kernel-contracts-v2" "npm:@zerodevapp/contracts@^4.0.0-beta.15"
     base64-js "^1.5.1"
     debug "^4.3.4"
     merkletreejs "^0.3.9"
 
-"@zerodevapp/web3auth@3.1.1":
-  version "3.1.1"
-  resolved "https://registry.yarnpkg.com/@zerodevapp/web3auth/-/web3auth-3.1.1.tgz#72f521e439a10dafcb6029480ba086647215cf11"
-  integrity sha512-7LXjpmJM5diVdYoDfxgkeak86ngO7mIqIQZ1u9I1C4OtxR6SQHe23VoMU3GqcZUYACvQWXI8xcy6qcDJgDgr9A==
+"@zerodevapp/web3auth@3.1.33":
+  version "3.1.33"
+  resolved "https://registry.yarnpkg.com/@zerodevapp/web3auth/-/web3auth-3.1.33.tgz#f8b6c41d91ab3638a6267e0e7944e95bf7537a48"
+  integrity sha512-+5mFxpu79swCRlBxHUaq/EKIRS2I18ByclSou4zVJwGWN0iQkp1izw3yjwC4JsXvtaILhRzDBxBDE21PLr+64Q==
   dependencies:
     "@walletconnect/client" "^1.8.0"
     "@web3auth/base" "5.0.1"
     "@web3auth/modal" "5.0.1"
     "@web3auth/no-modal" "5.0.1"
     "@web3auth/openlogin-adapter" "5.0.1"
-    "@zerodevapp/sdk" "3.1.5"
+    "@zerodevapp/sdk" "3.1.52"
 
 JSONStream@^1.3.5:
   version "1.3.5"
@@ -2260,7 +2301,7 @@ bn.js@4.11.8:
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.8.tgz#2cde09eb5ee341f484746bb0309b3253b1b1442f"
   integrity sha512-ItfYfPLkWHUjckQCk8xC+LwxgK8NYcXywGigJgSwOP8Y2iyWT4f2vsZnoOXTTbo+o5yXmIUJ4gn5538SO5S3gA==
 
-bn.js@^4.11.8, bn.js@^4.11.9, bn.js@^4.12.0:
+bn.js@^4.11.8, bn.js@^4.11.9:
   version "4.12.0"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.12.0.tgz#775b3f278efbb9718eec7361f483fb36fbbfea88"
   integrity sha512-c98Bf3tPniI+scsdk237ku1Dc3ujXQTSgyiPUDEOe7tRkhrqridvh8klBv0HCEso1OLOYcHuCv/cS6DNxKH+ZA==
@@ -2618,6 +2659,11 @@ dir-glob@^3.0.1:
   integrity sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==
   dependencies:
     path-type "^4.0.0"
+
+dotenv@^16.0.3:
+  version "16.3.1"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.3.1.tgz#369034de7d7e5b120972693352a3bf112172cc3e"
+  integrity sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==
 
 dotignore@^0.1.2:
   version "0.1.2"
@@ -2987,6 +3033,16 @@ ethereum-cryptography@^0.1.3:
     scrypt-js "^3.0.0"
     secp256k1 "^4.0.1"
     setimmediate "^1.0.5"
+
+ethereum-cryptography@^1.1.2:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/ethereum-cryptography/-/ethereum-cryptography-1.2.0.tgz#5ccfa183e85fdaf9f9b299a79430c044268c9b3a"
+  integrity sha512-6yFQC9b5ug6/17CQpCyE3k9eKBMdhyVjzUy1WkiuY/E4vj/SXDBbCw8QEIaXqf0Mf2SnY6RmpDcwlUmBSS0EJw==
+  dependencies:
+    "@noble/hashes" "1.2.0"
+    "@noble/secp256k1" "1.7.1"
+    "@scure/bip32" "1.1.5"
+    "@scure/bip39" "1.1.1"
 
 ethereum-cryptography@^2.0.0:
   version "2.0.0"
