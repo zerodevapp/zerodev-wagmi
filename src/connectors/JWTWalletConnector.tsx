@@ -1,7 +1,7 @@
 import { Chain } from 'wagmi'
 import { AbstractWeb3AuthWalletConnector, AbstractWeb3AuthWalletConnectorOptions } from './AbstractWeb3AuthWalletConnector'
-import { LoginProvider, ZeroDevWeb3Auth } from '@zerodevapp/web3auth'
-import { ChainId } from '@zerodevapp/web3auth/dist/types'
+import { LoginProvider, ZeroDevWeb3Auth } from '@zerodev/web3auth'
+import { ChainId } from '@zerodev/web3auth/dist/types'
 import { getConfig } from '@wagmi/core'
 
 interface JWTWalletConnectorOptions extends AbstractWeb3AuthWalletConnectorOptions {

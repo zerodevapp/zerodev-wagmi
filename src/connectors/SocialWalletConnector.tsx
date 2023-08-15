@@ -1,9 +1,9 @@
 import { AccountParams, ZeroDevConnector } from "./ZeroDevConnector";
-import { ZeroDevWeb3AuthWithModal, ZeroDevWeb3AuthInitOptions, ZeroDevWeb3AuthOptions } from '@zerodevapp/web3auth'
+import { ZeroDevWeb3AuthWithModal, ZeroDevWeb3AuthInitOptions, ZeroDevWeb3AuthOptions } from '@zerodev/web3auth'
 import { getConfig } from '@wagmi/core';
 import type { Chain } from 'wagmi/chains';
 import { connect } from 'wagmi/actions'
-import { ChainId } from "@zerodevapp/web3auth/dist/types";
+import { ChainId } from "@zerodev/web3auth/dist/types";
 import { SmartAccountSigner } from "@alchemy/aa-core";
 
 export type SocialWalletConnectorOptions = Omit<Partial<AccountParams>, "owner" | "disconnect"> & Partial<ZeroDevWeb3AuthOptions>

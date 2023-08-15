@@ -71,7 +71,7 @@ function queryFn({ walletClient }: { walletClient?: GetWalletClientResult }) {
  * Eagerly fetches the parameters required for sending a transaction such as the gas estimate and resolving an ENS address (if required).
  *
  * @example
- * import { useSendUserOperation, usePrepareSendUserOperation } from '@zerodevapp/wagmi'
+ * import { useSendUserOperation, usePrepareSendUserOperation } from '@zerodev/wagmi'
  *
  * const { request } = usePrepareSendUserOperation({
  *   to: 'moxey.eth',

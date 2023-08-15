@@ -1,11 +1,11 @@
 import { AccountParams, ZeroDevConnector } from "./ZeroDevConnector";
-import { ZeroDevWeb3Auth, type ZeroDevWeb3AuthOptions, type LoginProvider, type ZeroDevWeb3AuthInitOptions } from '@zerodevapp/web3auth'
+import { ZeroDevWeb3Auth, type ZeroDevWeb3AuthOptions, type LoginProvider, type ZeroDevWeb3AuthInitOptions } from '@zerodev/web3auth'
 import { getConfig } from '@wagmi/core';
 import type { Chain } from 'wagmi/chains';
 import { connect } from 'wagmi/actions'
 import { SmartAccountSigner } from "@alchemy/aa-core";
 import { createWalletClient, custom } from "viem";
-import { convertWalletClientToAccountSigner } from '@zerodevapp/sdk'
+import { convertWalletClientToAccountSigner } from '@zerodev/sdk'
 
 export type AbstractWeb3AuthWalletConnectorOptions = Omit<Partial<AccountParams>, "owner" | "disconnect"> & Partial<ZeroDevWeb3AuthOptions>
 

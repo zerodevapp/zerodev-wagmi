@@ -1,5 +1,5 @@
 import { Connector, Address } from 'wagmi';
-import { ECDSAProvider, ZeroDevProvider, convertWalletClientToAccountSigner } from '@zerodevapp/sdk';
+import { ECDSAProvider, ZeroDevProvider, convertWalletClientToAccountSigner, getRPCProviderOwner } from '@zerodev/sdk';
 import { AccountParams } from '../connectors/ZeroDevConnector';
 import { ZeroDevApiService } from '../services/ZeroDevApiService';
 import { Chain, createWalletClient, custom } from 'viem';
@@ -7,9 +7,19 @@ import { Chain, createWalletClient, custom } from 'viem';
 export const enhanceConnectorWithAA = (connector: Connector, params: Omit<AccountParams, "owner">) => {
     let provider: ZeroDevProvider | null = null
     let walletClient: any | null = null
+    let _wallets: any[]
     const enhancedConnector= new Proxy(connector, {
+        set(target, prop, value, receiver) {
+            if (prop === '_wallets') {
+                return _wallets = value
+            }
+            return Reflect.set(target, prop, value, receiver)
+        },
         get(target, prop, receiver){
-            const value = target[prop as keyof Connector];
+            if (prop === '_wallets') return _wallets
+            if (prop === "switchChain") return undefined
+            let value = target[prop as keyof Connector];
+            if (prop === 'id') value += '-zerodev'
             if (value instanceof Function) {
                 return async function (...args: any) {
                     const source = await value.apply(target, args)
@@ -30,18 +40,12 @@ export const enhanceConnectorWithAA = (connector: Connector, params: Omit<Accoun
                             return (await receiver.getProvider()).chainId
                         case 'getProvider':
                             if (provider === null) {
-                                const address = source.selectedAddress
                                 const chainId = await receiver.getChainId()
                                 const chain = connector.chains.find(c => c.id === chainId)
-                                const owner = convertWalletClientToAccountSigner(createWalletClient({
-                                    account: address,
-                                    chain,
-                                    transport: custom(source)
-                                }))
                                 if (!chain) throw new Error('missing chain')
                                 provider = await ECDSAProvider.init({
                                     projectId: params.projectId,
-                                    owner,
+                                    owner: getRPCProviderOwner(source),
                                     opts: {
                                         paymasterConfig: {
                                             policy: "VERIFYING_PAYMASTER"

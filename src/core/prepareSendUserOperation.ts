@@ -35,7 +35,7 @@ const resolveAddress = async (to: Address) => {
  * Returns config to be passed through to `sendUserOperation`.
  *
  * @example
- * import { prepareSendUserOperation, sendUserOperation } from '@zerodevapp/wagmi'
+ * import { prepareSendUserOperation, sendUserOperation } from '@zerodev/wagmi'
  *
  * const config = await prepareSendUserOperation({
  *  request: {

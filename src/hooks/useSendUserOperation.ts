@@ -53,7 +53,7 @@ const mutationFn = ({
  * to [avoid UX pitfalls](https://wagmi.sh/react/prepare-hooks#ux-pitfalls-without-prepare-hooks).
  *
  * @example
- * import { useSendUserOperation, usePrepareSendUserOperation } from '@zerodevapp/wagmi'
+ * import { useSendUserOperation, usePrepareSendUserOperation } from '@zerodev/wagmi'
  *
  * const config = usePrepareSendUserOperation({
  *   request: {

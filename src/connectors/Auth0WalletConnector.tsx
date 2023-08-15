@@ -1,5 +1,5 @@
 import { AbstractWeb3AuthWalletConnector } from './AbstractWeb3AuthWalletConnector'
-import { LoginProvider } from '@zerodevapp/web3auth'
+import { LoginProvider } from '@zerodev/web3auth'
 
 export class Auth0WalletConnector extends AbstractWeb3AuthWalletConnector {
     id = 'auth0'

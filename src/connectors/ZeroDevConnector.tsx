@@ -1,6 +1,6 @@
 import { Connector } from "wagmi";
 import { getConfig } from '@wagmi/core';
-import { ECDSAProvider } from '@zerodevapp/sdk'
+import { ECDSAProvider, PaymasterAndBundlerProviders, SupportedGasToken } from '@zerodev/sdk'
 import type { Chain } from 'wagmi/chains';
 import { normalizeChainId } from "../utilities/normalizeChainId";
 import { ProjectConfiguration } from "../types";
@@ -11,17 +11,16 @@ import { SmartAccountSigner } from "@alchemy/aa-core";
 export type AccountParams = {
     projectId: string
     owner: SmartAccountSigner
+    index?: bigint
 
     shimDisconnect?: boolean
     disconnect?: () => Promise<any>,
     projectIds?: string[]
-    // index?: BigInt,
-    // rpcProvider?: JsonRpcProvider | FallbackProvider
-    // bundlerUrl?: string
-    // gasToken?: SupportedGasToken,
-    // useWebsocketProvider?: boolean,
-    // transactionTimeout?: number
-    // paymasterProvider?: PaymasterProvider
+    rpcUrl?: string,
+    gasToken?: SupportedGasToken,
+    paymasterProvider?: PaymasterAndBundlerProviders,
+    bundlerProvider?: PaymasterAndBundlerProviders,
+    onlySendSponsoredTransaction?: boolean
 }
 
 export class ZeroDevConnector<Options = AccountParams> extends Connector<ECDSAProvider, Options> {
@@ -99,11 +98,21 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ECDSAPr
         if (this.provider === null) {
             const options = await this.getOptions()
             this.provider = await ECDSAProvider.init({
+                bundlerProvider: options.bundlerProvider,
                 projectId: options.projectId,
                 owner: options.owner,
                 opts: {
+                    providerConfig: {
+                        rpcUrl: options.rpcUrl
+                    },
+                    accountConfig: {
+                        index: options.index
+                    },
                     paymasterConfig: {
-                        policy: "VERIFYING_PAYMASTER"
+                        paymasterProvider: options.paymasterProvider,
+                        onlySendSponsoredTransaction: options.onlySendSponsoredTransaction,
+                        policy: options.gasToken ? 'TOKEN_PAYMASTER' :  "VERIFYING_PAYMASTER",
+                        gasToken: options.gasToken
                     },
                 }
             });
