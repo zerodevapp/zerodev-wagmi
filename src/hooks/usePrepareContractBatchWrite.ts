@@ -12,9 +12,11 @@ export type ContractCall = {
 
 export const usePrepareContractBatchWrite = (config: Omit<UsePrepareSendUserOperationConfig, 'to' | 'data'> & {calls: ContractCall[]}) => {
     const to = useMemo(() => {
+        if (!config.enabled) return []
         return config.calls.map(call => call.address)
     }, [config?.calls])
     const data = useMemo(() => {
+        if (!config.enabled) return []
         return config.calls.map(call => encodeFunctionData({abi: isStringArray(call.abi) ? parseAbi(call.abi) : call.abi, functionName: call.functionName, args: call.args}))
     }, [config?.calls])
     return usePrepareSendUserOperation({
