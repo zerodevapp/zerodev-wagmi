@@ -3,6 +3,7 @@ import { AbstractWeb3AuthWalletConnector, AbstractWeb3AuthWalletConnectorOptions
 import { LoginProvider, ZeroDevWeb3Auth } from '@zerodev/web3auth'
 import { ChainId } from '@zerodev/web3auth/dist/types'
 import { getConfig } from '@wagmi/core'
+import { createWalletClient, custom } from 'viem'
 
 interface JWTWalletConnectorOptions extends AbstractWeb3AuthWalletConnectorOptions {
     jwt: string
@@ -32,7 +33,29 @@ export class JWTWalletConnector extends AbstractWeb3AuthWalletConnector {
                     getConfig().storage?.setItem(`${this.loginProvider}-connecting`, false)
                 }, 1000)
             }
-            this.owner = provider
+            const walletClient = createWalletClient({
+                chain: await this.getChain(),
+                transport: custom(provider)
+            })
+            const address = (await walletClient.getAddresses())[0]
+            this.owner = {
+                getAddress: async () => address,
+                signMessage: async (message: string | Uint8Array) =>  {
+                    return walletClient.signMessage({
+                        account: address, 
+                        message: typeof message === 'string' ? message : {raw: message}
+                    })
+                }
+            }
+            // this.owner = {
+            //     getAddress: async () => address,
+            //     signMessage: async (message: string | Uint8Array) =>  {
+            //         return walletClient.signMessage({
+            //             account: address, 
+            //             message: typeof message === 'string' ? message : {raw: message}
+            //         })
+            //     }
+            // }
         }
         return await super.connect({ chainId })
     }
