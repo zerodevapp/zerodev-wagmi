@@ -3,7 +3,8 @@ import { AbstractWeb3AuthWalletConnector, AbstractWeb3AuthWalletConnectorOptions
 import { LoginProvider, ZeroDevWeb3Auth } from '@zerodev/web3auth'
 import { ChainId } from '@zerodev/web3auth/dist/types'
 import { getConfig } from '@wagmi/core'
-import { createWalletClient, custom } from 'viem'
+import { Hex, createWalletClient, custom } from 'viem'
+import { SignTypedDataParams } from '@alchemy/aa-core';
 
 interface JWTWalletConnectorOptions extends AbstractWeb3AuthWalletConnectorOptions {
     jwt: string
@@ -45,6 +46,9 @@ export class JWTWalletConnector extends AbstractWeb3AuthWalletConnector {
                         account: address, 
                         message: typeof message === 'string' ? message : {raw: message}
                     })
+                },
+                signTypedData: async (params: SignTypedDataParams): Promise<Hex> => {
+                    return walletClient.signTypedData({...params, account: address})
                 }
             }
             // this.owner = {
