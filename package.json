@@ -1,35 +1,46 @@
 {
   "name": "@zerodev/wagmi",
-  "version": "4.0.11",
-  "main": "dist/index.js",
+  "version": "4.1.0",
   "files": [
     "dist",
     "rainbowkit",
     "connectkit",
     "web3modal"
   ],
+  "type": "module",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/types/index.d.ts",
+  "typings": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "default": "./dist/cjs/index.js"
     },
     "./rainbowkit": {
-      "types": "./dist/integrations/rainbowkit/index.d.ts",
-      "default": "./dist/integrations/rainbowkit/index.js"
+      "types": "./dist/types/integrations/rainbowkit/index.d.ts",
+      "import": "./dist/esm/integrations/rainbowkit/index.js",
+      "default": "./dist/cjs/integrations/rainbowkit/index.js"
     },
     "./connectkit": {
-      "types": "./dist/integrations/connectkit/index.d.ts",
-      "default": "./dist/integrations/connectkit/index.js"
+      "types": "./dist/types/integrations/connectkit/index.d.ts",
+      "import": "./dist/esm/integrations/connectkit/index.js",
+      "default": "./dist/cjs/integrations/connectkit/index.js"
     },
     "./web3modal": {
-      "types": "./dist/integrations/web3modal/index.d.ts",
-      "default": "./dist/integrations/web3modal/index.js"
-    }
+      "types": "./dist/types/integrations/web3modal/index.d.ts",
+      "import": "./dist/esm/integrations/web3modal/index.js",
+      "default": "./dist/cjs/integrations/web3modal/index.js"
+    },
+    "./package.json": "./package.json"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsup src --dts --target es5",
-    "dev": "tsup src --watch --dts --target es5"
+    "clean": "rm -rf ./dist",
+    "build:cjs": "tsc --project tsconfig.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false && echo > ./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
+    "build:esm": "tsc --project tsconfig.json --module es2015 --outDir ./dist/esm --removeComments && echo > ./dist/esm/package.json '{\"type\":\"module\"}'",
+    "build:types": "tsc --project tsconfig.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",
+    "build": "npm run clean && npm run build:cjs && npm run build:esm && npm run build:types"
   },
   "peerDependencies": {
     "@wagmi/core": ">=1.3.x",
@@ -42,15 +53,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zerodev/sdk": "4.0.16",
-    "@zerodev/web3auth": "4.0.10"
+    "@zerodev/sdk": "4.0.17",
+    "@zerodev/web3auth": "4.1.0"
   },
   "devDependencies": {
-    "@swc/core": "^1.3.36",
     "@types/react": "^18.2.0",
-    "tsup": "6.4.0",
     "typescript": "^5.0.4"
   },
-  "types": "./dist/index.d.ts",
   "description": ""
 }

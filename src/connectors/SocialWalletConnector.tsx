@@ -5,6 +5,7 @@ import type { Chain } from 'wagmi/chains';
 import { connect } from 'wagmi/actions'
 import { ChainId } from "@zerodev/web3auth/dist/types";
 import { SmartAccountSigner } from "@alchemy/aa-core";
+import { getRPCProviderOwner } from "@zerodev/sdk";
 
 export type SocialWalletConnectorOptions = Omit<Partial<AccountParams>, "owner" | "disconnect"> & Partial<ZeroDevWeb3AuthOptions>
 
@@ -13,7 +14,7 @@ export abstract class SocialWalletConnector extends ZeroDevConnector<SocialWalle
     id = 'social'
     name = 'Social'
     owner: SmartAccountSigner | undefined;
-    web3Auth: typeof ZeroDevWeb3AuthWithModal | undefined
+    web3Auth: ZeroDevWeb3AuthWithModal | undefined
     
     constructor({chains = [], options}: {chains?: Chain[]; options: SocialWalletConnectorOptions}) {
         super({chains, options})
@@ -31,13 +32,13 @@ export abstract class SocialWalletConnector extends ZeroDevConnector<SocialWalle
                 ) {
                     web3AuthInitOptions['onConnect'] = async (userInfo: any) => {
                         if (this.loginProvider === userInfo.typeOfLogin)  {
-                            this.owner = this.web3Auth?.provider
+                            if (this.web3Auth?.provider) this.owner = getRPCProviderOwner(this.web3Auth.provider)
                             connect(({chainId, connector: this}))
                         }
                         getConfig().storage?.setItem(`${this.loginProvider}-connecting`, false)
                     }
                 }
-                this.web3Auth.init(web3AuthInitOptions)
+                this.web3Auth.initialize(web3AuthInitOptions)
             }
         })
 
@@ -54,11 +55,11 @@ export abstract class SocialWalletConnector extends ZeroDevConnector<SocialWalle
                 await this.web3Auth?.logout()
                 provider = null
             }
-            if (!provider) {
+            if (!this.web3Auth?.connected) {
                 getConfig().storage?.setItem(`${this.loginProvider}-connecting`, true)
-                provider = await this.web3Auth?.connect()
+                provider = await this.web3Auth?.login()
+                this.owner = getRPCProviderOwner(provider)
             }
-            this.owner = provider
         }
         return await super.connect({ chainId })
     }

@@ -5,6 +5,7 @@ import { ChainId } from '@zerodev/web3auth/dist/types'
 import { getConfig } from '@wagmi/core'
 import { Hex, createWalletClient, custom } from 'viem'
 import { SignTypedDataParams } from '@alchemy/aa-core';
+import { getRPCProviderOwner } from '@zerodev/sdk'
 
 interface JWTWalletConnectorOptions extends AbstractWeb3AuthWalletConnectorOptions {
     jwt: string
@@ -27,39 +28,14 @@ export class JWTWalletConnector extends AbstractWeb3AuthWalletConnector {
                 await this.web3Auth?.logout()
                 provider = null
             }
-            if (!provider) {
+            if (!this.web3Auth?.connected) {
                 getConfig().storage?.setItem(`${this.loginProvider}-connecting`, true)
-                provider = await this.web3Auth?.connect(this.loginProvider, {jwt: this.jwt})
+                provider = await this.web3Auth?.login(this.loginProvider, {jwt: this.jwt})
                 setTimeout(() => {
                     getConfig().storage?.setItem(`${this.loginProvider}-connecting`, false)
                 }, 1000)
             }
-            const walletClient = createWalletClient({
-                chain: await this.getChain(),
-                transport: custom(provider)
-            })
-            const address = (await walletClient.getAddresses())[0]
-            this.owner = {
-                getAddress: async () => address,
-                signMessage: async (message: string | Uint8Array) =>  {
-                    return walletClient.signMessage({
-                        account: address, 
-                        message: typeof message === 'string' ? message : {raw: message}
-                    })
-                },
-                signTypedData: async (params: SignTypedDataParams): Promise<Hex> => {
-                    return walletClient.signTypedData({...params, account: address})
-                }
-            }
-            // this.owner = {
-            //     getAddress: async () => address,
-            //     signMessage: async (message: string | Uint8Array) =>  {
-            //         return walletClient.signMessage({
-            //             account: address, 
-            //             message: typeof message === 'string' ? message : {raw: message}
-            //         })
-            //     }
-            // }
+            this.owner =  getRPCProviderOwner(provider)
         }
         return await super.connect({ chainId })
     }

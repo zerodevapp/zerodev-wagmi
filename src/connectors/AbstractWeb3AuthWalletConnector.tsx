@@ -3,16 +3,15 @@ import { ZeroDevWeb3Auth, type ZeroDevWeb3AuthOptions, type LoginProvider, type 
 import { getConfig } from '@wagmi/core';
 import type { Chain } from 'wagmi/chains';
 import { connect } from 'wagmi/actions'
-import { SignTypedDataParams, SmartAccountSigner } from "@alchemy/aa-core";
-import { Hex, createWalletClient, custom } from "viem";
-import { convertWalletClientToAccountSigner } from '@zerodev/sdk'
+import { LocalAccountSigner, SmartAccountSigner } from "@alchemy/aa-core";
+import { getRPCProviderOwner } from '@zerodev/sdk'
 
 export type AbstractWeb3AuthWalletConnectorOptions = Omit<Partial<AccountParams>, "owner" | "disconnect"> & Partial<ZeroDevWeb3AuthOptions>
 
 export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector {
     abstract loginProvider: LoginProvider
     owner: SmartAccountSigner | undefined;
-    web3Auth: typeof ZeroDevWeb3Auth | undefined
+    web3Auth: ZeroDevWeb3Auth | undefined
     
     constructor(
         {chains = [], options}: {chains?: Chain[]; options: AbstractWeb3AuthWalletConnectorOptions},
@@ -32,27 +31,21 @@ export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector {
                 ) {
                     web3AuthInitOptions['onConnect'] = async (userInfo: any) => {
                         if (this.loginProvider === userInfo.typeOfLogin)  {
-                            this.owner = this.web3Auth.provider
+                            if (this.web3Auth?.provider) {
+                                this.owner = getRPCProviderOwner(this.web3Auth.provider)
+                            }
                             connect(({chainId, connector: this}))
                         }
                         getConfig().storage?.setItem(`${this.loginProvider}-connecting`, false)
                     }
                 }
-                this.web3Auth.init(web3AuthInitOptions, this.loginProvider)
+                this.web3Auth.initialize(web3AuthInitOptions, this.loginProvider)
             }
         })
     }
 
     async isAuthorized() {
         return false
-        let provider = this.web3Auth?.provider
-        if (!provider && ((await this.getOptions()).shimDisconnect || getConfig().storage?.getItem(this.shimDisconnectKey))) {
-            provider = await this.web3Auth?.connect(this.loginProvider)
-        }
-        if (provider) {
-            this.owner = provider
-        }
-        return super.isAuthorized()
     }
 
     //@ts-expect-error
@@ -63,35 +56,16 @@ export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector {
                 await this.web3Auth?.logout()
                 provider = null
             }
-            if (!provider) {
+            if (!this.web3Auth?.connected) {
                 getConfig().storage?.setItem(`${this.loginProvider}-connecting`, true)
-                provider = await this.web3Auth?.connect(this.loginProvider)
+                provider = await this.web3Auth?.login(this.loginProvider)
                 setTimeout(() => {
                     getConfig().storage?.setItem(`${this.loginProvider}-connecting`, false)
                 }, 1000)
             }
-            const walletClient = createWalletClient({
-                chain: await this.getChain(),
-                transport: custom(provider)
-            })
-            const address = (await walletClient.getAddresses())[0]
-            this.owner = {
-                getAddress: async () => address,
-                signMessage: async (message: string | Uint8Array) =>  {
-                    return walletClient.signMessage({
-                        account: address, 
-                        message: typeof message === 'string' ? message : {raw: message}
-                    })
-                },
-                signTypedData: async (params: SignTypedDataParams): Promise<Hex> => {
-                    return walletClient.signTypedData({...params, account: address})
-                }
+            if (provider) {
+                this.owner = getRPCProviderOwner(provider)
             }
-            // const walletClient = createWalletClient({
-            //     chain: await this.getChain(),
-            //     transport: custom(provider)
-            // })
-            // this.owner = convertWalletClientToAccountSigner(walletClient)
         }
         return await super.connect({ chainId })
     }

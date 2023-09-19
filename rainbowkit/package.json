@@ -1,3 +1,5 @@
 {
-  "main": "../dist/integrations/rainbowkit/index.js"
+  "main": "../dist/cjs/integrations/rainbowkit/index.js",
+  "module": "../dist/esm/integrations/rainbowkit/index.js",
+  "types": "../dist/types/integrations/rainbowkit/index.js"
 }
