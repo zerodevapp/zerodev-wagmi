@@ -1,18 +1,18 @@
-export { enhanceConnectorWithAA } from './utilities/enhanceConnectorWithAA';
-export { ZeroDevConnector, type AccountParams } from './connectors/ZeroDevConnector'
-export { FacebookSocialWalletConnector } from './connectors/FacebookSocialWalletConnector';
-export { GoogleSocialWalletConnector } from './connectors/GoogleSocialWalletConnector';
-export { SocialWalletConnector } from './connectors/SocialWalletConnector';
-export { GithubSocialWalletConnector } from './connectors/GithubSocialWalletConnector';
-export { DiscordSocialWalletConnector } from './connectors/DiscordSocialWalletConnector';
-export { TwitchSocialWalletConnector } from './connectors/TwitchSocialWalletConnector';
-export { TwitterSocialWalletConnector } from './connectors/TwitterSocialWalletConnector';
-export { JWTWalletConnector } from './connectors/JWTWalletConnector';
-export { Auth0WalletConnector } from './connectors/Auth0WalletConnector';
+export { enhanceConnectorWithAA } from './utilities/enhanceConnectorWithAA.js';
+export { ZeroDevConnector, type AccountParams } from './connectors/ZeroDevConnector.js'
+export { FacebookSocialWalletConnector } from './connectors/FacebookSocialWalletConnector.js';
+export { GoogleSocialWalletConnector } from './connectors/GoogleSocialWalletConnector.js';
+export { SocialWalletConnector } from './connectors/SocialWalletConnector.js';
+export { GithubSocialWalletConnector } from './connectors/GithubSocialWalletConnector.js';
+export { DiscordSocialWalletConnector } from './connectors/DiscordSocialWalletConnector.js';
+export { TwitchSocialWalletConnector } from './connectors/TwitchSocialWalletConnector.js';
+export { TwitterSocialWalletConnector } from './connectors/TwitterSocialWalletConnector.js';
+export { JWTWalletConnector } from './connectors/JWTWalletConnector.js';
+export { Auth0WalletConnector } from './connectors/Auth0WalletConnector.js';
 
-export { prepareSendUserOperation } from './core/prepareSendUserOperation'
-export { sendUserOperation } from './core/sendUserOperation'
-export { usePrepareSendUserOperation } from './hooks/usePrepareSendUserOperation'
-export { useSendUserOperation } from './hooks/useSendUserOperation'
-export { usePrepareContractBatchWrite } from './hooks/usePrepareContractBatchWrite';
-export { useContractBatchWrite } from './hooks/useContractBatchWrite';
+export { prepareSendUserOperation } from './core/prepareSendUserOperation.js'
+export { sendUserOperation } from './core/sendUserOperation.js'
+export { usePrepareSendUserOperation } from './hooks/usePrepareSendUserOperation.js'
+export { useSendUserOperation } from './hooks/useSendUserOperation.js'
+export { usePrepareContractBatchWrite } from './hooks/usePrepareContractBatchWrite.js';
+export { useContractBatchWrite } from './hooks/useContractBatchWrite.js';

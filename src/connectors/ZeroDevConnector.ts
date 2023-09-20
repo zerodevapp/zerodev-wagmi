@@ -2,9 +2,9 @@ import { Connector } from "wagmi";
 import { getConfig } from '@wagmi/core';
 import { ECDSAProvider, PaymasterAndBundlerProviders, SupportedGasToken } from '@zerodev/sdk'
 import type { Chain } from 'wagmi/chains';
-import { normalizeChainId } from "../utilities/normalizeChainId";
-import { ProjectConfiguration } from "../types";
-import { getProjectsConfiguration } from "../utilities/getProjectsConfiguration";
+import { normalizeChainId } from "../utilities/normalizeChainId.js";
+import { ProjectConfiguration } from "../types/index.js";
+import { getProjectsConfiguration } from "../utilities/getProjectsConfiguration.js";
 import { createWalletClient, custom } from "viem";
 import { SmartAccountSigner } from "@alchemy/aa-core";
 

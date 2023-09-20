@@ -3,8 +3,8 @@ import { isAddress } from 'viem'
 
 import { WalletClient } from 'wagmi'
 import { ConnectorNotFoundError, fetchEnsAddress, getPublicClient, getWalletClient } from '@wagmi/core'
-import { assertActiveChain } from '../utilities/assertActiveChain'
-import { SendUserOperationArgs, SendUserOperationParameters } from './sendUserOperation'
+import { assertActiveChain } from '../utilities/assertActiveChain.js'
+import { SendUserOperationArgs, SendUserOperationParameters } from './sendUserOperation.js'
 
 export type PrepareSendUserOperationArgs<
   TWalletClient extends WalletClient = WalletClient,

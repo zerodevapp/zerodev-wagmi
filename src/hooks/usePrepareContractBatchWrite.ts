@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { encodeFunctionData, parseAbi } from "viem";
-import { UsePrepareSendUserOperationConfig, usePrepareSendUserOperation } from "./usePrepareSendUserOperation";
-import { isStringArray } from "../utilities/isStringArray";
+import { UsePrepareSendUserOperationConfig, usePrepareSendUserOperation } from "./usePrepareSendUserOperation.js";
+import { isStringArray } from "../utilities/isStringArray.js";
 
 export type ContractCall = {
     address: string;

@@ -1,7 +1,7 @@
 import { Connector, Address } from 'wagmi';
 import { ECDSAProvider, ZeroDevProvider, convertWalletClientToAccountSigner, getRPCProviderOwner } from '@zerodev/sdk';
-import { AccountParams } from '../connectors/ZeroDevConnector';
-import { ZeroDevApiService } from '../services/ZeroDevApiService';
+import { AccountParams } from '../connectors/ZeroDevConnector.js';
+import { ZeroDevApiService } from '../services/ZeroDevApiService.js';
 import { Chain, createWalletClient, custom } from 'viem';
 
 export const enhanceConnectorWithAA = (connector: Connector, params: Omit<AccountParams, "owner">) => {

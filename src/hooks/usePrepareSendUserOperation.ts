@@ -1,9 +1,9 @@
 import type {
   GetWalletClientResult,
 } from '@wagmi/core'
-import { QueryConfig, QueryFunctionArgs } from '../types'
+import { QueryConfig, QueryFunctionArgs } from '../types/index.js'
 import { useNetwork, useQuery, useWalletClient } from 'wagmi'
-import { PrepareSendUserOperationArgs, PrepareSendUserOperationResult, prepareSendUserOperation } from '../core/prepareSendUserOperation'
+import { PrepareSendUserOperationArgs, PrepareSendUserOperationResult, prepareSendUserOperation } from '../core/prepareSendUserOperation.js'
 
 
 export type UsePrepareSendUserOperationConfig =

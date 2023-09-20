@@ -1,4 +1,4 @@
-import { AccountParams, ZeroDevConnector } from "./ZeroDevConnector";
+import { AccountParams, ZeroDevConnector } from "./ZeroDevConnector.js";
 import { ZeroDevWeb3AuthWithModal, ZeroDevWeb3AuthInitOptions, ZeroDevWeb3AuthOptions } from '@zerodev/web3auth'
 import { getConfig } from '@wagmi/core';
 import type { Chain } from 'wagmi/chains';

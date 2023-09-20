@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { MutationConfig } from '../types';
 import { useMutation } from 'wagmi';
-import { SendUserOperationArgs, SendUserOperationResult, sendUserOperation } from '../core/sendUserOperation';
+import { SendUserOperationArgs, SendUserOperationResult, sendUserOperation } from '../core/sendUserOperation.js';
 
 
 export type UseSendUserOperationArgs<

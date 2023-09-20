@@ -1,7 +1,7 @@
 import { Chain } from "wagmi";
-import { AbstractWeb3AuthWalletConnectorOptions } from "../../../connectors/AbstractWeb3AuthWalletConnector";
-import { FacebookSocialWalletConnector } from "../../../connectors/FacebookSocialWalletConnector";
-import { Wallet } from "./wallet";
+import { AbstractWeb3AuthWalletConnectorOptions } from "../../../connectors/AbstractWeb3AuthWalletConnector.js";
+import { FacebookSocialWalletConnector } from "../../../connectors/FacebookSocialWalletConnector.js";
+import { Wallet } from "./wallet.js";
 
 export function facebookWallet({chains, options}: {chains?: Chain[], options: AbstractWeb3AuthWalletConnectorOptions}): Wallet{
     return {

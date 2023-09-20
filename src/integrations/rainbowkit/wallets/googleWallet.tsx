@@ -1,7 +1,7 @@
 import { Chain } from "wagmi";
-import { AbstractWeb3AuthWalletConnectorOptions } from "../../../connectors/AbstractWeb3AuthWalletConnector";
-import { GoogleSocialWalletConnector } from "../../../connectors/GoogleSocialWalletConnector";
-import { Wallet } from "./wallet";
+import { AbstractWeb3AuthWalletConnectorOptions } from "../../../connectors/AbstractWeb3AuthWalletConnector.js";
+import { GoogleSocialWalletConnector } from "../../../connectors/GoogleSocialWalletConnector.js";
+import { Wallet } from "./wallet.js";
 
 export function googleWallet({chains, options}: {chains?: Chain[], options: AbstractWeb3AuthWalletConnectorOptions}): Wallet{
     return {

@@ -1,7 +1,7 @@
 import { Chain } from "wagmi";
-import { AbstractWeb3AuthWalletConnectorOptions } from "../../../connectors/AbstractWeb3AuthWalletConnector";
-import { TwitterSocialWalletConnector } from "../../../connectors/TwitterSocialWalletConnector";
-import { Wallet } from "./wallet";
+import { AbstractWeb3AuthWalletConnectorOptions } from "../../../connectors/AbstractWeb3AuthWalletConnector.js";
+import { TwitterSocialWalletConnector } from "../../../connectors/TwitterSocialWalletConnector.js";
+import { Wallet } from "./wallet.js";
 
 export function twitterWallet({chains, options}: {chains?: Chain[], options: AbstractWeb3AuthWalletConnectorOptions}): Wallet{
     return {

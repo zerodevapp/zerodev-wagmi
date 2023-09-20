@@ -1,7 +1,7 @@
 import { Chain } from "wagmi";
-import { AbstractWeb3AuthWalletConnectorOptions } from "../../../connectors/AbstractWeb3AuthWalletConnector";
-import { DiscordSocialWalletConnector } from "../../../connectors/DiscordSocialWalletConnector";
-import { Wallet } from "./wallet";
+import { AbstractWeb3AuthWalletConnectorOptions } from "../../../connectors/AbstractWeb3AuthWalletConnector.js";
+import { DiscordSocialWalletConnector } from "../../../connectors/DiscordSocialWalletConnector.js";
+import { Wallet } from "./wallet.js";
 
 export function discordWallet({chains, options}: {chains?: Chain[], options: AbstractWeb3AuthWalletConnectorOptions}): Wallet{
     return {

@@ -1,10 +1,8 @@
 import { Chain } from 'wagmi'
-import { AbstractWeb3AuthWalletConnector, AbstractWeb3AuthWalletConnectorOptions } from './AbstractWeb3AuthWalletConnector'
+import { AbstractWeb3AuthWalletConnector, AbstractWeb3AuthWalletConnectorOptions } from './AbstractWeb3AuthWalletConnector.js'
 import { LoginProvider, ZeroDevWeb3Auth } from '@zerodev/web3auth'
 import { ChainId } from '@zerodev/web3auth/dist/types'
 import { getConfig } from '@wagmi/core'
-import { Hex, createWalletClient, custom } from 'viem'
-import { SignTypedDataParams } from '@alchemy/aa-core';
 import { getRPCProviderOwner } from '@zerodev/sdk'
 
 interface JWTWalletConnectorOptions extends AbstractWeb3AuthWalletConnectorOptions {

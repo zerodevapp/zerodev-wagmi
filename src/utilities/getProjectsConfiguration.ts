@@ -1,4 +1,4 @@
-import { ProjectConfiguration } from "../types"
+import { ProjectConfiguration } from "../types/index.js"
 
 const projectConfigurationCache: { [key: string]: Promise<ProjectConfiguration> } = {}
 

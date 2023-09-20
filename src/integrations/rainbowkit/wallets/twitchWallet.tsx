@@ -1,7 +1,7 @@
 import { Chain } from "wagmi";
-import { AbstractWeb3AuthWalletConnectorOptions } from "../../../connectors/AbstractWeb3AuthWalletConnector";
-import { TwitchSocialWalletConnector } from "../../../connectors/TwitchSocialWalletConnector";
-import { Wallet } from "./wallet";
+import { AbstractWeb3AuthWalletConnectorOptions } from "../../../connectors/AbstractWeb3AuthWalletConnector.js";
+import { TwitchSocialWalletConnector } from "../../../connectors/TwitchSocialWalletConnector.js";
+import { Wallet } from "./wallet.js";
 
 export function twitchWallet({chains, options}: {chains?: Chain[], options: AbstractWeb3AuthWalletConnectorOptions}): Wallet{
     return {

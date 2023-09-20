@@ -1,1 +1,1 @@
-export { supportedSocialConnectors } from "./supportedSocialConnectors";
+export { supportedSocialConnectors } from "./supportedSocialConnectors.js";
