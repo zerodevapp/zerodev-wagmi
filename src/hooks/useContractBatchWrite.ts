@@ -8,6 +8,7 @@ export type ContractCall = {
     abi: any;
     functionName: string;
     args: any[];
+    value?: bigint
 }
 
 export const useContractBatchWrite = (config: Parameters<typeof useSendUserOperation>[0]  & {calls?: ContractCall[]}) => {
@@ -19,9 +20,14 @@ export const useContractBatchWrite = (config: Parameters<typeof useSendUserOpera
         if (config.calls) return config.calls.map(call => encodeFunctionData({abi: isStringArray(call.abi) ? parseAbi(call.abi) : call.abi, functionName: call.functionName, args: call.args}))
         return []
     }, [config?.calls])
+    const value = useMemo(() => {
+        if (config.calls) return config.calls.map(call => call.value)
+        return []
+    }, [config?.calls])
     return useSendUserOperation({
         ...config,
         to: to.length > 0 ? to : config.to,
         data: data.length > 0 ? data : config.data,
+        value: value.length > 0 ? value : config.value,
     })
 }

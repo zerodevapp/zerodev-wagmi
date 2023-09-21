@@ -8,6 +8,7 @@ export type ContractCall = {
     abi: any;
     functionName: string;
     args: any[];
+    value?: bigint
 }
 
 export const usePrepareContractBatchWrite = (config: Omit<UsePrepareSendUserOperationConfig, 'to' | 'data'> & {calls: ContractCall[]}) => {
@@ -19,9 +20,14 @@ export const usePrepareContractBatchWrite = (config: Omit<UsePrepareSendUserOper
         if (!config.enabled) return []
         return config.calls.map(call => encodeFunctionData({abi: isStringArray(call.abi) ? parseAbi(call.abi) : call.abi, functionName: call.functionName, args: call.args}))
     }, [config?.calls])
+    const value = useMemo(() => {
+        if (!config.enabled) return []
+        return config.calls.map(call => call.value)
+    }, [config?.calls])
     return usePrepareSendUserOperation({
         ...config,
         to,
         data,
+        value
     })
 }

@@ -34,14 +34,14 @@ export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector {
                             if (this.web3Auth?.provider) {
                                 this.owner = getRPCProviderOwner(this.web3Auth.provider)
                             }
-                            connect(({chainId, connector: this}))
+                            connect(({chainId, connector: this})).catch(() => {})
                         }
                         getConfig().storage?.setItem(`${this.loginProvider}-connecting`, false)
                     }
                 }
                 this.web3Auth.initialize(web3AuthInitOptions, this.loginProvider)
             }
-        })
+        }).catch(() => {})
     }
 
     async isAuthorized() {
