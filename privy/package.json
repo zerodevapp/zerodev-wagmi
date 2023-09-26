@@ -1,0 +1,5 @@
+{
+  "main": "../dist/cjs/integrations/privy/index.js",
+  "module": "../dist/esm/integrations/privy/index.js",
+  "types": "../dist/types/integrations/privy/index.js"
+}
