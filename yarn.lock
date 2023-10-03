@@ -2063,10 +2063,10 @@
     "@account-abstraction/contracts" "^0.6.0"
     dotenv "^16.0.3"
 
-"@zerodevapp/sdk@3.2.7":
-  version "3.2.7"
-  resolved "https://registry.yarnpkg.com/@zerodevapp/sdk/-/sdk-3.2.7.tgz#1ca7d30c9389f3f88faee8d5570eefa0f6f63c14"
-  integrity sha512-jn7J9yOjYTJF91fddEypOf4EL4erUuU0BSeQ83C0oKEm5HTR5/hcaGl8Z5YQJMz2kVAMhuNvKz4vH5rJaaca8w==
+"@zerodevapp/sdk@3.2.8":
+  version "3.2.8"
+  resolved "https://registry.yarnpkg.com/@zerodevapp/sdk/-/sdk-3.2.8.tgz#93919668025d716b99938e34d8f37169f2b52452"
+  integrity sha512-cGbTFZgafPRc+YXOOp5+UI5o2nnIvZ80zt0/YgRNErv33URCS7dPCz5UHB+mvITNIvvDX/A28TVdANqMig+TdQ==
   dependencies:
     "@account-abstraction/contracts" "^0.6.0"
     "@account-abstraction/utils" "^0.4.0"
@@ -2087,17 +2087,17 @@
     debug "^4.3.4"
     merkletreejs "^0.3.9"
 
-"@zerodevapp/web3auth@3.2.6":
-  version "3.2.6"
-  resolved "https://registry.yarnpkg.com/@zerodevapp/web3auth/-/web3auth-3.2.6.tgz#0a7b36dcb48604a66835d6b414580051ce5ebc05"
-  integrity sha512-4N12lDjSaag8SrExZeX1qsfQ82a+9YVpYigLlMdgakZ/KIjMiEXLDHKZ56iqET2lzQp5Yo47i8X0kQFthfgr0Q==
+"@zerodevapp/web3auth@3.2.7":
+  version "3.2.7"
+  resolved "https://registry.yarnpkg.com/@zerodevapp/web3auth/-/web3auth-3.2.7.tgz#778d622122a9d64ccdd5ef50f5ca77a70080e442"
+  integrity sha512-zuWxTKCQLryJ/S2me5edijaxhodAhK3b4nvYUCduMVyVLfSmzIByhxL40iWmBg2E0nRW+JwEL6v+O0MW35Ut8Q==
   dependencies:
     "@walletconnect/client" "^1.8.0"
     "@web3auth/base" "5.0.1"
     "@web3auth/modal" "5.0.1"
     "@web3auth/no-modal" "5.0.1"
     "@web3auth/openlogin-adapter" "5.0.1"
-    "@zerodevapp/sdk" "3.2.7"
+    "@zerodevapp/sdk" "3.2.8"
 
 JSONStream@^1.3.5:
   version "1.3.5"
