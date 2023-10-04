@@ -641,7 +641,7 @@
   dependencies:
     "@noble/hashes" "1.3.1"
 
-"@noble/curves@1.2.0", "@noble/curves@^1.0.0", "@noble/curves@~1.2.0":
+"@noble/curves@1.2.0", "@noble/curves@^1.0.0", "@noble/curves@^1.2.0", "@noble/curves@~1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@noble/curves/-/curves-1.2.0.tgz#92d7e12e4e49b23105a2555c6984d41733d65c35"
   integrity sha512-oYclrNgRaM9SsBUBVbb8M6DTV7ZHRTKugureoYEncY5c65HOmRzvSiTE3y5CYaPYJA/GVkrhXEoF0M3Ya9PMnw==
@@ -757,7 +757,28 @@
   dependencies:
     buffer "~6.0.3"
 
-"@solana/web3.js@^1.70.1", "@solana/web3.js@^1.78.4":
+"@solana/web3.js@^1.70.1":
+  version "1.78.7"
+  resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.78.7.tgz#a53dd3bbd604c13468555cb5eea1d39d69dd9e82"
+  integrity sha512-BiAuCaHnbxgHsjNt/4dfMYjvPDRw+tollg6uWdVZpPogQW2GJj51LQ2NeVhfIGlJIU75O03YZeIc0r0H6LH1vA==
+  dependencies:
+    "@babel/runtime" "^7.22.6"
+    "@noble/curves" "^1.2.0"
+    "@noble/hashes" "^1.3.1"
+    "@solana/buffer-layout" "^4.0.0"
+    agentkeepalive "^4.3.0"
+    bigint-buffer "^1.1.5"
+    bn.js "^5.2.1"
+    borsh "^0.7.0"
+    bs58 "^4.0.1"
+    buffer "6.0.3"
+    fast-stable-stringify "^1.0.0"
+    jayson "^4.1.0"
+    node-fetch "^2.6.12"
+    rpc-websockets "^7.5.1"
+    superstruct "^0.14.2"
+
+"@solana/web3.js@^1.78.4":
   version "1.78.5"
   resolved "https://registry.yarnpkg.com/@solana/web3.js/-/web3.js-1.78.5.tgz#591cd47423cdb0b5e5cb7e8dc4dc70b2abe02f80"
   integrity sha512-2ZHsDNqkKdglJQrIvJ3p2DmgS3cGnary3VJyqt9C1SPrpAtLYzcElr3xyXJOznyQTU/8AMw+GoF11lFoKbicKg==
@@ -912,38 +933,38 @@
     "@stablelib/random" "^1.0.2"
     "@stablelib/wipe" "^1.0.1"
 
-"@tanstack/query-core@4.35.3":
-  version "4.35.3"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.35.3.tgz#1c127e66b4ad1beeac052db83a812d7cb67369e1"
-  integrity sha512-PS+WEjd9wzKTyNjjQymvcOe1yg8f3wYc6mD+vb6CKyZAKvu4sIJwryfqfBULITKCla7P9C4l5e9RXePHvZOZeQ==
+"@tanstack/query-core@4.35.7":
+  version "4.35.7"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-core/-/query-core-4.35.7.tgz#31d6f520ab8abedb6024d2d870af8afca764d048"
+  integrity sha512-PgDJtX75ubFS0WCYFM7DqEoJ4QbxU3S5OH3gJSI40xr7UVVax3/J4CM3XUMOTs+EOT5YGEfssi3tfRVGte4DEw==
 
-"@tanstack/query-persist-client-core@4.35.3":
-  version "4.35.3"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-persist-client-core/-/query-persist-client-core-4.35.3.tgz#61a57d9360cb35a75acb57f96795071dd1c4611e"
-  integrity sha512-UlUMsvmy12qgPzphIq8iyFtwxuv/vaEyFQEFDVVCvyrqj2G020qMZiCA1vj3+gasmCXh59EraiC2eY4Iqo0/PA==
+"@tanstack/query-persist-client-core@4.35.7":
+  version "4.35.7"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-persist-client-core/-/query-persist-client-core-4.35.7.tgz#37a4ccfa991c2a06a5d453d7eafd6d1d72db5d0e"
+  integrity sha512-RhnvVtjR2owK50XosSWJh3SD7516c/cQZO3FhPOPKfnCP7b7NqJbeiznKqxIIR88rvNlIOmZ2BIerdvvW7WQ5g==
   dependencies:
-    "@tanstack/query-core" "4.35.3"
+    "@tanstack/query-core" "4.35.7"
 
 "@tanstack/query-sync-storage-persister@^4.27.1":
-  version "4.35.3"
-  resolved "https://registry.yarnpkg.com/@tanstack/query-sync-storage-persister/-/query-sync-storage-persister-4.35.3.tgz#0b5be86608e1448dacc17fbb88270dd4c257b9bc"
-  integrity sha512-q9axt4iJkRnhR9R9qou+Q2+T2S21jwgf/7carYs9DQGLoE9r9YnwxgbmDE72yQd1glcsGF26UqqO6WO8ziNCrQ==
+  version "4.35.7"
+  resolved "https://registry.yarnpkg.com/@tanstack/query-sync-storage-persister/-/query-sync-storage-persister-4.35.7.tgz#aa9c07ca0cef639e674698b04a2f87f8df8a2537"
+  integrity sha512-LwOV4FfbRQmCH3MUXU2xngnws5AzRJ8mtc9JlDogRVwutlDEeY2bYSiu7xV6NDRLPf0/+0KCMzWeBx6Tlgnkgw==
   dependencies:
-    "@tanstack/query-persist-client-core" "4.35.3"
+    "@tanstack/query-persist-client-core" "4.35.7"
 
 "@tanstack/react-query-persist-client@^4.28.0":
-  version "4.35.5"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query-persist-client/-/react-query-persist-client-4.35.5.tgz#095258f30382efa643441fb76185bac2c55c9f41"
-  integrity sha512-d8pFzvMD6AD2guGXLP2A4r0mfCRuZ8C4VMBl5+EZvka/e4o9/DRfizZB4S9w0Za+sOQJ4/SdD3OOk2BwYEykkQ==
+  version "4.35.7"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query-persist-client/-/react-query-persist-client-4.35.7.tgz#a23d76973b061f0574db0697170a8b674f675b2b"
+  integrity sha512-ziEZPMQO7bTjloCbnd4PBhL7U6hlAuivLqWyoHSNNNJYG1ZtjFfbpqA8XGw6t07PYSuASs/6oMRRzAQe0NkS2w==
   dependencies:
-    "@tanstack/query-persist-client-core" "4.35.3"
+    "@tanstack/query-persist-client-core" "4.35.7"
 
 "@tanstack/react-query@^4.28.0":
-  version "4.35.3"
-  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.35.3.tgz#03d726ef6a19d426166427c6539b003dd9606d1b"
-  integrity sha512-UgTPioip/rGG3EQilXfA2j4BJkhEQsR+KAbF+KIuvQ7j4MkgnTCJF01SfRpIRNtQTlEfz/+IL7+jP8WA8bFbsw==
+  version "4.35.7"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-query/-/react-query-4.35.7.tgz#35a1db50156411b2a9eb68a020bae416948939db"
+  integrity sha512-0MankquP/6EOM2ATfEov6ViiKemey5uTbjGlFMX1xGotwNaqC76YKDMJdHumZupPbZcZPWAeoPGEHQmVKIKoOQ==
   dependencies:
-    "@tanstack/query-core" "4.35.3"
+    "@tanstack/query-core" "4.35.7"
     use-sync-external-store "^1.2.0"
 
 "@toruslabs/base-controllers@^4.0.1":
@@ -1205,10 +1226,10 @@
     abitype "0.8.7"
     eventemitter3 "^4.0.7"
 
-"@wagmi/core@1.4.2":
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/@wagmi/core/-/core-1.4.2.tgz#facf21c06d236b651782cfdd20005f02a3afcb9b"
-  integrity sha512-szgNs2DCbBXKsq3wdm/YD8FWkg7lfmTRAv25b2nJYJUTQN59pVXznlWfq8VCJLamhKOYjeYHlTQxXkAeUAJdhw==
+"@wagmi/core@1.4.3":
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/@wagmi/core/-/core-1.4.3.tgz#1dfe1492b3cc1579d18fa07c88a9cfb82111ffcc"
+  integrity sha512-CIV9jwv5ue+WpqmA3FvwGa+23cppe7oIaz6TRnlGm0Hm0wDImSaQSWqcsFyOPvleD29oOIJ8e3KnHINEvI64AA==
   dependencies:
     "@wagmi/connectors" "3.1.2"
     abitype "0.8.7"
@@ -1581,7 +1602,7 @@
   dependencies:
     "@web3auth/base" "^7.0.1"
 
-"@web3auth/base-plugin@^7.0.0-beta.0", "@web3auth/base-plugin@^7.0.1":
+"@web3auth/base-plugin@^7.0.1":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@web3auth/base-plugin/-/base-plugin-7.0.1.tgz#a59de3b9c42fea9ad31438a55986edd28104203b"
   integrity sha512-BAwqZcEoDClXGIStAjhWsf+lguzifZ8hYz/wvcwE0ZOfhkXVNls96wSr/C7Cx+s94Hir8kN1zM2OROBM8f7YNQ==
@@ -1599,17 +1620,6 @@
     "@web3auth/base" "^7.0.1"
     json-rpc-random-id "^1.0.1"
 
-"@web3auth/base-provider@^7.0.2-beta.0":
-  version "7.0.2-beta.0"
-  resolved "https://registry.yarnpkg.com/@web3auth/base-provider/-/base-provider-7.0.2-beta.0.tgz#353d417e3eabdffcc0990d1cc04e88f3ed6d56bf"
-  integrity sha512-4CIysgZ3/SuOLDB5Z2itVioEO4iyMuI/UdKZhH/zq4OF6UGE+yCGTZcdBYgF5KxiY+zDwJBWW2Vl3oeGOaarIA==
-  dependencies:
-    "@metamask/rpc-errors" "^6.0.0"
-    "@toruslabs/base-controllers" "^4.0.1"
-    "@toruslabs/openlogin-jrpc" "^5.0.2"
-    "@web3auth/base" "^7.0.0-beta.0"
-    json-rpc-random-id "^1.0.1"
-
 "@web3auth/base-solana-adapter@^7.0.1":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@web3auth/base-solana-adapter/-/base-solana-adapter-7.0.1.tgz#3632bcc53edb6407af327aeeec80828d3273055f"
@@ -1618,7 +1628,7 @@
     "@web3auth/base" "^7.0.1"
     bs58 "^5.0.0"
 
-"@web3auth/base@7.0.1", "@web3auth/base@^7.0.0-beta.0", "@web3auth/base@^7.0.1":
+"@web3auth/base@7.0.1", "@web3auth/base@^7.0.1":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@web3auth/base/-/base-7.0.1.tgz#2116b5de8914ec4c6547a60bf1caf90428bca39f"
   integrity sha512-6ft4XAD37tobOxgkZhideiBMqoVJTpvAvYD0R99IDmpazpIrX8b4RBgwLQ/gIlNmGZhkU1UoTzub19xTWI9h6w==
@@ -1662,10 +1672,10 @@
     "@web3auth/base" "^7.0.1"
     "@web3auth/base-evm-adapter" "^7.0.1"
 
-"@web3auth/modal@7.0.2":
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/@web3auth/modal/-/modal-7.0.2.tgz#cb740b93c5c92012327cdc2842f4c054e7236d9a"
-  integrity sha512-gvMl0phbfIm5E80hPKdpEnG76eXr7j1hxZEjXLt9UqW/DH0qll/yKxuIQcNhTyI6HRlV+kum5W+nxVIyQzzzLQ==
+"@web3auth/modal@7.0.3":
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/@web3auth/modal/-/modal-7.0.3.tgz#6e2e4bbc5b79c1a69783ad401c8efc04e9a02efb"
+  integrity sha512-6jYGOgG5OiFcXv6KR0hPokq6lPkFt7VBH34M9Stij7WyDg8I1S/Qjlx5vKM9rhUP4/d51wNmb77t1rQI+TGsDg==
   dependencies:
     "@web3auth/base" "^7.0.1"
     "@web3auth/base-provider" "^7.0.1"
@@ -1675,24 +1685,12 @@
     "@web3auth/openlogin-adapter" "^7.0.1"
     "@web3auth/phantom-adapter" "^7.0.2"
     "@web3auth/solana-provider" "^7.0.2"
-    "@web3auth/torus-evm-adapter" "^7.0.1"
+    "@web3auth/torus-evm-adapter" "^7.0.3"
     "@web3auth/torus-solana-adapter" "^7.0.2"
     "@web3auth/ui" "^7.0.2"
     "@web3auth/wallet-connect-v2-adapter" "^7.0.2"
 
-"@web3auth/no-modal@7.0.2-beta.0":
-  version "7.0.2-beta.0"
-  resolved "https://registry.yarnpkg.com/@web3auth/no-modal/-/no-modal-7.0.2-beta.0.tgz#ba4194018e3c18906a523fb197ea3ad70186497c"
-  integrity sha512-B3IAogYeo1B/uR1P6Wd8bkYRwC3dXRcUOLqb/HouI8ewNRQkuI4AEQBezWH9y5dovFHdud99bDgNwacnqx9Ibg==
-  dependencies:
-    "@toruslabs/openlogin" "^5.0.3"
-    "@toruslabs/openlogin-jrpc" "^5.0.2"
-    "@toruslabs/openlogin-utils" "^5.0.2"
-    "@web3auth/base" "^7.0.0-beta.0"
-    "@web3auth/base-plugin" "^7.0.0-beta.0"
-    "@web3auth/base-provider" "^7.0.2-beta.0"
-
-"@web3auth/no-modal@^7.0.1":
+"@web3auth/no-modal@7.0.1", "@web3auth/no-modal@^7.0.1":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@web3auth/no-modal/-/no-modal-7.0.1.tgz#1b8ed4847516473b3f565fec549b3ced6e37a057"
   integrity sha512-1QQwLInofozN4SBRWNcT7d/HNDR0t2H2KVyzkyPQFR601GetBgGD9vSKFO/xpr6SLlGNaQSbVXhVPXf/l3iIHA==
@@ -1704,18 +1702,7 @@
     "@web3auth/base-plugin" "^7.0.1"
     "@web3auth/base-provider" "^7.0.1"
 
-"@web3auth/openlogin-adapter@7.0.2-beta.0":
-  version "7.0.2-beta.0"
-  resolved "https://registry.yarnpkg.com/@web3auth/openlogin-adapter/-/openlogin-adapter-7.0.2-beta.0.tgz#0bf58a8b3f0797ae369e83a9a51e07559f7e00d6"
-  integrity sha512-8uF3YPGvB0QooQw9DQq8DMi5XLgSm0+/iQhsB8cc3AgAFXNQpn4f7jGfuIQF9vqqaAlEIHD8umYkOFx15Ver6Q==
-  dependencies:
-    "@toruslabs/openlogin" "^5.0.3"
-    "@toruslabs/openlogin-utils" "^5.0.2"
-    "@web3auth/base" "^7.0.0-beta.0"
-    "@web3auth/base-provider" "^7.0.2-beta.0"
-    lodash.merge "^4.6.2"
-
-"@web3auth/openlogin-adapter@^7.0.1":
+"@web3auth/openlogin-adapter@7.0.1", "@web3auth/openlogin-adapter@^7.0.1":
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/@web3auth/openlogin-adapter/-/openlogin-adapter-7.0.1.tgz#8c47c91d1bf9650f64c1afb2de9dde58e5dda380"
   integrity sha512-dameu4c762P+0MjNryBkrClbPDLxgU0N92iNtGbzHND3ZQILofDxqu6Gfopr915xpwbkk9OdLfx9Ib9ezc4o1A==
@@ -1753,10 +1740,10 @@
     bs58 "^5.0.0"
     json-rpc-random-id "^1.0.1"
 
-"@web3auth/torus-evm-adapter@^7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@web3auth/torus-evm-adapter/-/torus-evm-adapter-7.0.1.tgz#e2b70a23b9791810677d3c1b94838a37ec488693"
-  integrity sha512-FpEXoIShHvgSd0O2/Ig/+BmbymQoq5/A1zZl7L4/QR00lyECyXvyL3G0KUiPfQ+4xbDL0lqH1yH+jznCQ3CY2A==
+"@web3auth/torus-evm-adapter@^7.0.3":
+  version "7.0.3"
+  resolved "https://registry.yarnpkg.com/@web3auth/torus-evm-adapter/-/torus-evm-adapter-7.0.3.tgz#9eb5d3e906f3e1a48c86b0368a90101b13658f30"
+  integrity sha512-t/kw0jdctba2Am2ZARIqGAAbkxi937j6XKQnrX/4xfvd1nZf9LXg9ayV/IyDg9jO6fOXZLW+6RDOyPrKkxoh7Q==
   dependencies:
     "@toruslabs/torus-embed" "^3.0.0"
     "@web3auth/base" "^7.0.1"
@@ -1802,10 +1789,10 @@
     "@web3auth/ethereum-provider" "^7.0.2"
     lodash.merge "^4.6.2"
 
-"@zerodev/sdk@4.0.20":
-  version "4.0.20"
-  resolved "https://registry.yarnpkg.com/@zerodev/sdk/-/sdk-4.0.20.tgz#fb3c548f0635da038dfc4bde0a6b65d60149b6f1"
-  integrity sha512-LmaQOyeWu9aVAZTPq2bpU/TcirvZKbx9bJ+0j/ScmAg8KlA/SsNEvMK/TnRk7bXmfm2BQR93CMpzh1cSo2Dp/Q==
+"@zerodev/sdk@4.0.27":
+  version "4.0.27"
+  resolved "https://registry.yarnpkg.com/@zerodev/sdk/-/sdk-4.0.27.tgz#94277e2b6d21c5abc0284fc2ab4898ab8c240c13"
+  integrity sha512-KcxP2GCtfwUrFiUP/kU78Cc5eSkyiR98BzeaiuSkr/tEOxUf4USIbxRzCy/nV41BjLelLLJUAY+VbEj7jXMJBw==
   dependencies:
     "@alchemy/aa-core" "0.1.0-alpha.23"
     "@alchemy/aa-ethers" "0.1.0-alpha.23"
@@ -1813,17 +1800,17 @@
     merkletreejs "^0.3.10"
     viem "^1.5.3"
 
-"@zerodev/web3auth@4.1.6":
-  version "4.1.6"
-  resolved "https://registry.yarnpkg.com/@zerodev/web3auth/-/web3auth-4.1.6.tgz#6dca651dba08fc2e490a149299a213565ad03e46"
-  integrity sha512-6BoXAjvEXQ4LXozDI8JveQgMJqWXMzexcSBmgh9inx7ckwmpaoi4bzlotpEnszLz7wj9zc6JtdcOaothXIgTkg==
+"@zerodev/web3auth@4.1.13":
+  version "4.1.13"
+  resolved "https://registry.yarnpkg.com/@zerodev/web3auth/-/web3auth-4.1.13.tgz#c313e5f896f327b6b74dd1835c95289c5a11e7f1"
+  integrity sha512-kTkKN9ts/9CW1RajPM5IEuDBI0MyE6SVFGP1yEQ837sUCNqFGuhEfRi5esP2TfgSHJ0DlwWtr6E8xVfru4/EGA==
   dependencies:
     "@web3auth/base" "7.0.1"
     "@web3auth/ethereum-provider" "7.0.2"
-    "@web3auth/modal" "7.0.2"
-    "@web3auth/no-modal" "7.0.2-beta.0"
-    "@web3auth/openlogin-adapter" "7.0.2-beta.0"
-    "@zerodev/sdk" "4.0.20"
+    "@web3auth/modal" "7.0.3"
+    "@web3auth/no-modal" "7.0.1"
+    "@web3auth/openlogin-adapter" "7.0.1"
+    "@zerodev/sdk" "4.0.27"
 
 JSONStream@^1.3.5:
   version "1.3.5"
@@ -3164,9 +3151,9 @@ pngjs@^5.0.0:
   integrity sha512-40QW5YalBNfQo5yRYmiw7Yz6TKKVr3h6970B2YE+3fQpsWcrbj1PzJgxeJ19DRQjhMbKPIuMY8rFaXc8moolVw==
 
 preact@^10.12.0, preact@^10.5.9:
-  version "10.17.1"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-10.17.1.tgz#0a1b3c658c019e759326b9648c62912cf5c2dde1"
-  integrity sha512-X9BODrvQ4Ekwv9GURm9AKAGaomqXmip7NQTZgY7gcNmr7XE83adOMJvd3N42id1tMFU7ojiynRsYnY6/BRFxLA==
+  version "10.18.1"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.18.1.tgz#3b84bb305f0b05f4ad5784b981d15fcec4e105da"
+  integrity sha512-mKUD7RRkQQM6s7Rkmi7IFkoEHjuFqRQUaXamO61E6Nn7vqF/bo7EZCmSyrUnp2UWHw0O7XjZ2eeXis+m7tf4lg==
 
 process-warning@^1.0.0:
   version "1.0.0"
@@ -3635,9 +3622,9 @@ valtio@1.11.2:
     use-sync-external-store "1.2.0"
 
 viem@^1.0.0:
-  version "1.12.2"
-  resolved "https://registry.yarnpkg.com/viem/-/viem-1.12.2.tgz#f698f5a57567ec81472aacc6801cf6eae9d41ce3"
-  integrity sha512-aCaUCyg72ES+jK4s6tVYOMnOt4if71RwzgiUAUpAuaCgvHFfh9DCnwuEfwkxEZLE2vafOsirgJ3fcn7nsDVQoQ==
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/viem/-/viem-1.15.1.tgz#030fb900d8099e6a1bd16164fa4e1e5b8e24607a"
+  integrity sha512-lxk8wwUK7ZivYAUZ6pH+9Y6jjrfXXjafCOoASa4lw3ULUCT2BajU4SELarlxJQimpsFd7OZD4m4iEXYLF/bt6w==
   dependencies:
     "@adraffy/ens-normalize" "1.9.4"
     "@noble/curves" "1.2.0"
@@ -3669,15 +3656,15 @@ void-elements@3.1.0:
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-3.1.0.tgz#614f7fbf8d801f0bb5f0661f5b2f5785750e4f09"
   integrity sha512-Dhxzh5HZuiHQhbvTW9AMetFfBHDMYpo23Uo9btPXgdYP+3T5S+p+jgNy7spra+veYhBP2dCSgxR/i2Y02h5/6w==
 
-wagmi@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/wagmi/-/wagmi-1.4.2.tgz#cd681b1d35cf36613a11852cf25c2c39ce456f9f"
-  integrity sha512-Cxu0LatB44stqHoqdc6dgsTb9woYH1bEquJFq9PbTkePmnRCvceAD4aFUREUTaBWzIBcouhFlanWweDzEnb3mg==
+wagmi@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/wagmi/-/wagmi-1.4.3.tgz#e3f8c9e7ec5b899eb15a29a727e833d44bd50ce4"
+  integrity sha512-3LjbqqVRe6WW/WD07QCd5Itmo4nUfLsXuoc8F7nw9NslNUg8SFEb+g/jZ4665V0xh5ZRqPBJ7XOXASpdM2Y/5Q==
   dependencies:
     "@tanstack/query-sync-storage-persister" "^4.27.1"
     "@tanstack/react-query" "^4.28.0"
     "@tanstack/react-query-persist-client" "^4.28.0"
-    "@wagmi/core" "1.4.2"
+    "@wagmi/core" "1.4.3"
     abitype "0.8.7"
     use-sync-external-store "^1.2.0"
 
@@ -3804,8 +3791,8 @@ yargs@^15.3.1:
     yargs-parser "^18.1.2"
 
 zustand@^4.3.1:
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.4.1.tgz#0cd3a3e4756f21811bd956418fdc686877e8b3b0"
-  integrity sha512-QCPfstAS4EBiTQzlaGP1gmorkh/UL1Leaj2tdj+zZCZ/9bm0WS7sI2wnfD5lpOszFqWJ1DcPnGoY8RDL61uokw==
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/zustand/-/zustand-4.4.2.tgz#e26ad331d0a2e28a7d4aa126b00c7140b34904bb"
+  integrity sha512-qF3/vZHCrjPUX5DvPE3DPDZlh+FiAWRKlP9PI7SlW1MCk8q4vUCDqyWsbF8K41ne0Yx8eeeb0m1cypn1LqUMYQ==
   dependencies:
     use-sync-external-store "1.2.0"
