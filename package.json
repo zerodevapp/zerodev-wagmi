@@ -1,13 +1,12 @@
 {
   "name": "@zerodev/wagmi",
-  "version": "4.1.13",
+  "version": "4.1.14",
   "files": [
     "dist",
     "rainbowkit",
     "connectkit",
     "web3modal"
   ],
-  "type": "module",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
@@ -37,8 +36,8 @@
   },
   "scripts": {
     "clean": "rm -rf ./dist",
-    "build:cjs": "tsc --project tsconfig.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false && echo > ./dist/cjs/package.json '{\"type\":\"commonjs\"}'",
-    "build:esm": "tsc --project tsconfig.json --module es2015 --outDir ./dist/esm --removeComments && echo > ./dist/esm/package.json '{\"type\":\"module\"}'",
+    "build:cjs": "tsc --project tsconfig.json --module commonjs --outDir ./dist/cjs --removeComments --verbatimModuleSyntax false",
+    "build:esm": "tsc --project tsconfig.json --module esnext --outDir ./dist/esm --removeComments",
     "build:types": "tsc --project tsconfig.json --module esnext --declarationDir ./dist/types --emitDeclarationOnly --declaration --declarationMap",
     "build": "npm run clean && npm run build:cjs && npm run build:esm && npm run build:types"
   },
@@ -53,7 +52,7 @@
   "license": "ISC",
   "dependencies": {
     "@zerodev/sdk": "4.0.27",
-    "@zerodev/web3auth": "4.1.13",
+    "@zerodev/web3auth": "4.1.14",
     "ethers": "5.7.2"
   },
   "devDependencies": {
