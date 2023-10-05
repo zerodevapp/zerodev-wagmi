@@ -30,7 +30,8 @@ export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector {
                     (options.shimDisconnect && getConfig().storage?.getItem(this.shimDisconnectKey))
                 ) {
                     web3AuthInitOptions['onConnect'] = async (userInfo: any) => {
-                        if (this.loginProvider === userInfo.typeOfLogin)  {
+                        const typeOfLogin = userInfo.typeOfLogin
+                        if (this.loginProvider === typeOfLogin || (this.loginProvider === 'auth0' && typeOfLogin === 'jwt'))  {
                             if (this.web3Auth?.provider) {
                                 this.owner = getRPCProviderOwner(this.web3Auth.provider)
                             }
@@ -52,9 +53,12 @@ export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector {
     async connect({ chainId }) {
         if (!this.owner) {
             let provider = this.web3Auth?.provider
-            if (this.web3Auth?.status === 'connected' && (await this.web3Auth?.getUserInfo())?.typeOfLogin !== this.loginProvider) {
-                await this.web3Auth?.logout()
-                provider = null
+            if (this.web3Auth?.status === 'connected') {
+                const typeOfLogin = (await this.web3Auth?.getUserInfo())?.typeOfLogin
+                if (typeOfLogin !== this.loginProvider && (this.loginProvider !== 'auth0' || typeOfLogin !== 'jwt')) {
+                    await this.web3Auth?.logout()
+                    provider = null
+                }
             }
             if (!this.web3Auth?.connected) {
                 getConfig().storage?.setItem(`${this.loginProvider}-connecting`, true)
