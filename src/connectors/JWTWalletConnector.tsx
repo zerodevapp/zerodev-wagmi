@@ -26,9 +26,9 @@ export class JWTWalletConnector extends AbstractWeb3AuthWalletConnector {
                 await this.web3Auth?.logout()
                 provider = null
             }
-            if (!provider) {
+            if (!this.web3Auth?.connected) {
                 getClient().storage?.setItem(`${this.loginProvider}-connecting`, true)
-                provider = await this.web3Auth?.connect(this.loginProvider, {jwt: this.jwt})
+                provider = await this.web3Auth?.login(this.loginProvider, {jwt: this.jwt})
                 setTimeout(() => {
                     getClient().storage?.setItem(`${this.loginProvider}-connecting`, false)
                 }, 1000)

@@ -41,8 +41,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zerodevapp/sdk": "3.2.9",
-    "@zerodevapp/web3auth": "3.2.8",
+    "@zerodevapp/sdk": "3.2.10",
+    "@zerodevapp/web3auth": "/Users/sh31/code/zerodev/zerodev-web3auth",
     "react": "^18.2.0",
     "wagmi": "^0.12.0"
   },
