@@ -59,7 +59,6 @@ export abstract class SocialWalletConnector extends ZeroDevConnector<SocialWalle
                 provider = await this.web3Auth?.login()
                 this.owner = getRPCProviderOwner(provider)
             }
-            this.owner = getRPCProviderOwner(provider)
         }
         return await super.connect({ chainId })
     }
