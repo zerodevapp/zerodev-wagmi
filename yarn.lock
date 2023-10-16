@@ -2138,8 +2138,10 @@
     debug "^4.3.4"
     merkletreejs "^0.3.9"
 
-"@zerodevapp/web3auth@file:../zerodev-web3auth":
-  version "3.2.8"
+"@zerodevapp/web3auth@3.2.8-experimental.6":
+  version "3.2.8-experimental.6"
+  resolved "https://registry.yarnpkg.com/@zerodevapp/web3auth/-/web3auth-3.2.8-experimental.6.tgz#e5ade6fb8c6d9b99025e257d35c09519c59e5af8"
+  integrity sha512-Fpy2O5qgk+gRBtr0QANwO1q1jjEFtKJn31ZCLM0s3x7NCN8A3bbcV2tDZHan1GPlGqwZv83x9nkh7fqQB4WX6w==
   dependencies:
     "@web3auth/base" "7.0.1"
     "@web3auth/ethereum-provider" "7.0.2"
