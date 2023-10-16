@@ -20,7 +20,7 @@ export abstract class SocialWalletConnector extends ZeroDevConnector<SocialWalle
         super({chains, options})
         this.getChainId().then(chainId => {
             if (this.options.projectIds) {
-                this.web3Auth = new ZeroDevWeb3AuthWithModal(this.options.projectIds, chainId as ChainId, {
+                this.web3Auth = ZeroDevWeb3AuthWithModal.getInstance(this.options.projectIds, chainId as ChainId, {
                     adapterSettings: options.adapterSettings,
                     web3authOptions: options.web3authOptions
                 })

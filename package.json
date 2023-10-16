@@ -1,6 +1,6 @@
 {
   "name": "@zerodev/wagmi",
-  "version": "4.1.16",
+  "version": "4.1.17",
   "files": [
     "dist",
     "rainbowkit",
@@ -52,8 +52,9 @@
   "license": "ISC",
   "dependencies": {
     "@zerodev/sdk": "4.0.29",
-    "@zerodev/web3auth": "4.1.15",
-    "ethers": "5.7.2"
+    "@zerodev/web3auth": "/Users/blake/Documents/workspace/zerodev/zerodev-web3auth",
+    "ethers": "5.7.2",
+    "wagmi": "^1.4.2"
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
