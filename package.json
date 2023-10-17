@@ -1,6 +1,6 @@
 {
   "name": "@zerodev/wagmi",
-  "version": "4.1.17",
+  "version": "4.1.18",
   "files": [
     "dist",
     "rainbowkit",
@@ -52,7 +52,9 @@
     "wagmi": ">=1.3.x",
     "react": ">=17",
     "react-dom": ">=17",
-    "viem": ">=1.1.7"
+    "viem": ">=1.1.7",
+    "@privy-io/wagmi-connector": ">=0.1.x",
+    "@privy-io/react-auth": ">=1.33.x"
   },
   "author": "",
   "license": "ISC",
@@ -62,8 +64,10 @@
     "ethers": "5.7.2"
   },
   "devDependencies": {
+    "viem": "^1.16.6",
+    "wagmi": "^1.4.4",
     "@types/react": "^18.2.0",
-    "typescript": "^5.0.4",
+    "typescript": "^5.2.2",
     "@privy-io/wagmi-connector": "0.1.5-beta.3",
     "@privy-io/react-auth": "^1.33.0"
   },
