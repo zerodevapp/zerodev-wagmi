@@ -1,11 +1,12 @@
 {
   "name": "@zerodev/wagmi",
-  "version": "4.1.16",
+  "version": "4.1.17",
   "files": [
     "dist",
     "rainbowkit",
     "connectkit",
-    "web3modal"
+    "web3modal",
+    "privy"
   ],
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -16,6 +17,11 @@
       "types": "./dist/types/index.d.ts",
       "import": "./dist/esm/index.js",
       "default": "./dist/cjs/index.js"
+    },
+    "./privy": {
+      "types": "./dist/types/integrations/privy/index.d.ts",
+      "import": "./dist/esm/integrations/privy/index.js",
+      "default": "./dist/cjs/integrations/privy/index.js"
     },
     "./rainbowkit": {
       "types": "./dist/types/integrations/rainbowkit/index.d.ts",
@@ -57,7 +63,9 @@
   },
   "devDependencies": {
     "@types/react": "^18.2.0",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "@privy-io/wagmi-connector": "0.1.5-beta.3",
+    "@privy-io/react-auth": "^1.33.0"
   },
   "description": ""
 }
