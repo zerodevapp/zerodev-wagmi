@@ -52,7 +52,7 @@
   "license": "ISC",
   "dependencies": {
     "@zerodev/sdk": "4.0.29",
-    "@zerodev/web3auth": "/Users/blake/Documents/workspace/zerodev/zerodev-web3auth",
+    "@zerodev/web3auth": "4.1.16",
     "ethers": "5.7.2",
     "wagmi": "^1.4.2"
   },
