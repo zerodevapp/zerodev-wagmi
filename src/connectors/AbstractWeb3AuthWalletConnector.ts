@@ -20,7 +20,7 @@ export abstract class AbstractWeb3AuthWalletConnector extends ZeroDevConnector {
         this.getChainId().then(chainId => {
             if (this.options.projectIds) {
                 const web3AuthInitOptions: ZeroDevWeb3AuthInitOptions = {}
-                this.web3Auth = new ZeroDevWeb3Auth(this.options.projectIds, chainId, {
+                this.web3Auth = ZeroDevWeb3Auth.getInstance(this.options.projectIds, chainId, {
                     adapterSettings: options.adapterSettings,
                     web3authOptions: options.web3authOptions
                 })
