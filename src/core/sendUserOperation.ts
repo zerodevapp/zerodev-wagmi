@@ -6,8 +6,8 @@ import type {
 } from 'viem'
 import { assertActiveChain } from '../utilities/assertActiveChain.js'
 import { prepareSendUserOperation } from './prepareSendUserOperation.js'
-import { GetAccountParameter } from 'viem/dist/types/types/account'
-import { GetChain } from 'viem/dist/types/types/chain'
+import { GetAccountParameter } from 'viem/_types/types/account.js'
+import { GetChain } from 'viem/_types/types/chain.js'
 import { UserOperationCallData } from '@alchemy/aa-core'
 
 export type SendUserOperationParameters<
