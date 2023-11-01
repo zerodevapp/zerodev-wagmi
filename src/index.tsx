@@ -14,5 +14,7 @@ export { prepareSendUserOperation } from './core/prepareSendUserOperation.js'
 export { sendUserOperation } from './core/sendUserOperation.js'
 export { usePrepareSendUserOperation } from './hooks/usePrepareSendUserOperation.js'
 export { useSendUserOperation } from './hooks/useSendUserOperation.js'
+export { usePrepareBuildUserOperation } from './hooks/usePrepareBuildUserOperation.js'
+export { useBuildUserOperation } from './hooks/useBuildUserOperation.js'
 export { usePrepareContractBatchWrite } from './hooks/usePrepareContractBatchWrite.js';
 export { useContractBatchWrite } from './hooks/useContractBatchWrite.js';
