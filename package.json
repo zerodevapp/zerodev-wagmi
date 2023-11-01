@@ -1,6 +1,6 @@
 {
   "name": "@zerodev/wagmi",
-  "version": "4.2.3",
+  "version": "4.2.4",
   "files": [
     "dist",
     "rainbowkit",
@@ -59,8 +59,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@zerodev/sdk": "4.1.5",
-    "@zerodev/web3auth": "4.2.4",
+    "@zerodev/sdk": "4.2.0",
+    "@zerodev/web3auth": "4.2.5",
     "ethers": "5.7.2"
   },
   "devDependencies": {
