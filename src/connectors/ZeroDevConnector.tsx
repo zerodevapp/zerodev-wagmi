@@ -23,7 +23,8 @@ export type AccountParams = {
     useWebsocketProvider?: boolean,
     transactionTimeout?: number
     paymasterProvider?: PaymasterProvider
-    bundlerProvider?: BundlerProvider
+    bundlerProvider?: BundlerProvider,
+    onlySendSponsoredTransaction?: boolean;
 }
 
 export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDevProvider, Options, ZeroDevSigner> {
