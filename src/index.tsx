@@ -16,3 +16,4 @@ export { usePrepareSendUserOperation } from './hooks/usePrepareSendUserOperation
 export { useSendUserOperation } from './hooks/useSendUserOperation.js'
 export { usePrepareContractBatchWrite } from './hooks/usePrepareContractBatchWrite.js';
 export { useContractBatchWrite } from './hooks/useContractBatchWrite.js';
+export { useEcdsaProvider } from './hooks/useEcdsaProvider.js';

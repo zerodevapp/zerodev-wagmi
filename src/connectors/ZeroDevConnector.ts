@@ -165,6 +165,7 @@ export class ZeroDevConnector<Options = AccountParams> extends Connector<ECDSAPr
             })
             this.walletClient.sendUserOperation = provider.sendUserOperation.bind(provider)
             this.walletClient.waitForUserOperationTransaction = provider.waitForUserOperationTransaction.bind(provider)
+            this.walletClient.ecdsaProvider = provider;
         }
         return this.walletClient
     }

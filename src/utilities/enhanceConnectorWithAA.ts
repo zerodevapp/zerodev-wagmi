@@ -66,6 +66,7 @@ export const enhanceConnectorWithAA = (connector: Connector, params: Omit<Accoun
                                 })
                                 walletClient.sendUserOperation = provider.sendUserOperation.bind(provider)
                                 walletClient.waitForUserOperationTransaction = provider.waitForUserOperationTransaction.bind(provider)
+                                walletClient.ecdsaProvider = provider;
                             }
                             return walletClient
                         case 'getAccount':

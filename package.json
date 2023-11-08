@@ -1,6 +1,6 @@
 {
   "name": "@zerodev/wagmi",
-  "version": "4.2.5",
+  "version": "4.2.6",
   "files": [
     "dist",
     "rainbowkit",

@@ -71,11 +71,14 @@ export class ZeroDevPrivyConnector extends PrivyConnector {
     override async getWalletClient({chainId}: {chainId?: number} = {}): Promise<WalletClient> {
         const chain = this.chains.find((x) => x.id === chainId);
 
+        const ecdsaProvider = await this.getECDSAProvider();
         const walletClient = createWalletClient({
             account: await this.getAccount(),
             chain,
-            transport: custom(await this.getECDSAProvider()),
+            transport: custom(ecdsaProvider),
         });
+        // @ts-expect-error
+        walletClient.ecdsaProvider = ecdsaProvider;
 
         return walletClient as WalletClient;
     }
