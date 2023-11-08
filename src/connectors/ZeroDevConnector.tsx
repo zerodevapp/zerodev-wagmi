@@ -25,6 +25,7 @@ export type AccountParams = {
     paymasterProvider?: PaymasterProvider
     bundlerProvider?: BundlerProvider,
     onlySendSponsoredTransaction?: boolean;
+    priorityFeeBuffer?: number;
 }
 
 export class ZeroDevConnector<Options = AccountParams> extends Connector<ZeroDevProvider, Options, ZeroDevSigner> {
