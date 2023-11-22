@@ -2271,29 +2271,30 @@
     "@web3auth/ethereum-provider" "^7.0.2"
     lodash.merge "^4.6.2"
 
-"@zerodev/sdk@4.3.2":
-  version "4.3.2"
-  resolved "https://registry.yarnpkg.com/@zerodev/sdk/-/sdk-4.3.2.tgz#56ed55f1b00affc4a5551eee15a396dec5801d9c"
-  integrity sha512-gaZLnuIm8rKko4/HrHbjqQBWd6lsQ+31QYRTSueb8NDaBUrpISmn9YJWAi+ce2kPad2XnqQa0CoReS584UpqcQ==
+"@zerodev/sdk@4.3.3":
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/@zerodev/sdk/-/sdk-4.3.3.tgz#93b77351bd33c3bb15d34d95e08a92598383ba7c"
+  integrity sha512-vSb34URm4GYZbFfJRmR8UvILwbwXFGD7pkmePW8G7M1BGEOJ89WTm15kgm4Qz13KmLLxB+eKP+67rtcBmgdJ/g==
   dependencies:
     "@alchemy/aa-core" "0.1.0-alpha.23"
     "@alchemy/aa-ethers" "0.1.0-alpha.23"
     "@openzeppelin/merkle-tree" "^1.0.5"
     axios "^1.4.0"
     merkletreejs "^0.3.10"
+    radash "^11.0.0"
     viem "^1.5.3"
 
-"@zerodev/web3auth@4.3.3":
-  version "4.3.3"
-  resolved "https://registry.yarnpkg.com/@zerodev/web3auth/-/web3auth-4.3.3.tgz#c0ecbefff4472ede820aa31818cab2bac3b474fc"
-  integrity sha512-4tLmbaoxy7Psjq4Y5an+FmuKYK6Oeh9DxIi7yYb98viY6ECDr8JpHlRXcKJEBQLNA1xf8pSuZgz9p5g83qm59A==
+"@zerodev/web3auth@4.3.4":
+  version "4.3.4"
+  resolved "https://registry.yarnpkg.com/@zerodev/web3auth/-/web3auth-4.3.4.tgz#6f53e9302499cbe28a43604147bf7ba89efbd9ff"
+  integrity sha512-S8rC8VRoIRp16Gj+U49jfSXlqJZIMSzkG2A6OMfBi0S4SuW7B0oYdcKCDbA6wGDW7HuUNxL8aK1O8+pRgmSmTA==
   dependencies:
     "@web3auth/base" "7.0.1"
     "@web3auth/ethereum-provider" "7.0.2"
     "@web3auth/modal" "7.0.3"
     "@web3auth/no-modal" "7.0.1"
     "@web3auth/openlogin-adapter" "7.0.1"
-    "@zerodev/sdk" "4.3.2"
+    "@zerodev/sdk" "4.3.3"
 
 JSONStream@^1.3.5:
   version "1.3.5"
@@ -4230,6 +4231,11 @@ quick-format-unescaped@^4.0.3:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/quick-format-unescaped/-/quick-format-unescaped-4.0.4.tgz#93ef6dd8d3453cbc7970dd614fad4c5954d6b5a7"
   integrity sha512-tYC1Q1hgyRuHgloV/YXs2w15unPVh8qfu/qCTfhTYamaw7fyhumKa2yGpdSo87vY32rIclj+4fWYQXUMs9EHvg==
+
+radash@^11.0.0:
+  version "11.0.0"
+  resolved "https://registry.yarnpkg.com/radash/-/radash-11.0.0.tgz#925698e94b554336fc159c253ac33a9a49881835"
+  integrity sha512-CRWxTFTDff0IELGJ/zz58yY4BDgyI14qSM5OLNKbCItJrff7m7dXbVF0kWYVCXQtPb3SXIVhXvAImH6eT7VLSg==
 
 randombytes@^2.1.0:
   version "2.1.0"
