@@ -41,7 +41,7 @@ export const ZeroDevPrivyWagmiProvider: React.FC<ZeroDevPrivyWagmiProviderProps>
                 return new ZeroDevPrivyConnector({logout, chains, activeWallet: eoaWallets[0], options});
             }
         }
-    }, [ready, authenticated, hasEmbeddedWallet, chains, options.useSmartWalletForExternalEOA]);
+    }, [ready, authenticated, hasEmbeddedWallet, chains, options.useSmartWalletForExternalEOA, embeddedWallet]);
 
     return (
     <PrivyWagmiConnector wagmiChainsConfig={wagmiChainsConfig} privyConnectorOverride={connector}>
