@@ -1,4 +1,4 @@
-import { createWalletClient, custom } from 'viem';
+import { Hex, createWalletClient, custom } from 'viem';
 import { PrivyConnector } from '@privy-io/wagmi-connector';
 import { ECDSAProvider, getRPCProviderOwner } from '@zerodev/sdk'
 import { WalletClient, Chain } from 'wagmi';
@@ -11,22 +11,26 @@ export class ZeroDevPrivyConnector extends PrivyConnector {
     ecdsaProvider: ECDSAProvider | undefined
     projectsConfiguration: Promise<ProjectConfiguration>
     chainIdProjectIdMap: {[key: number]: string} = {}
+    kernelAddress?: Hex
 
     constructor({
         logout,
         chains,
         activeWallet,
-        options
+        options,
+        kernelAddress,
     }: {
         logout: () => Promise<void>;
         chains?: Chain[];
         activeWallet?: ConnectedWallet;
-        options: Omit<AccountParams, 'owner'>
+        options: Omit<AccountParams, 'owner'>;
+        kernelAddress?: Hex;
     }) {
         super({ logout, chains, activeWallet});
         if (!options?.projectId && !options?.projectIds) throw Error('Please provide a projectId or projectIds')
         if (!options.projectId && options.projectIds) options.projectId = options.projectIds[0]
         if (options.projectId && !options.projectIds) options.projectIds = [options.projectId]
+        this.kernelAddress = kernelAddress
         this.projectsConfiguration = getProjectsConfiguration(options.projectIds!)
     }
 
@@ -51,7 +55,7 @@ export class ZeroDevPrivyConnector extends PrivyConnector {
     protected onChainChanged = (chainId: number | string) => {
         this.ecdsaProvider = undefined
         return super.onChainChanged(chainId)
-      };
+    };
 
     protected onAccountsChanged = (accounts: string[]) => {
         this.ecdsaProvider = undefined
@@ -63,6 +67,11 @@ export class ZeroDevPrivyConnector extends PrivyConnector {
             this.ecdsaProvider = await ECDSAProvider.init({
                 projectId: await this.getProjectIdFromChainId(await this.getChainId()),
                 owner: getRPCProviderOwner(await this.getProvider()),
+                opts: {
+                    accountConfig: {
+                        accountAddress: this.kernelAddress,
+                    },
+                }
             });
         }
         return this.ecdsaProvider
