@@ -2271,10 +2271,10 @@
     "@web3auth/ethereum-provider" "^7.0.2"
     lodash.merge "^4.6.2"
 
-"@zerodev/sdk@4.6.0":
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/@zerodev/sdk/-/sdk-4.6.0.tgz#2bf03e8d9722c1eb6b0e7ec3fd5a0b45fa1f7ffa"
-  integrity sha512-xgkJhkByYonFMQcGLlSDfjf8gqYx05e/I2LuBI6Gnpa9ZO0VCEHwq+quQcDcniQY6CdoKebhzPONQBPrWjxeLw==
+"@zerodev/sdk@4.6.1":
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/@zerodev/sdk/-/sdk-4.6.1.tgz#6168a7485abba116278b4add41e969d15021190d"
+  integrity sha512-CIE0pUN1O/NZacEofiZfWOQQoUCjE/3hzpx5jmfONE3hj/cicZJ+4pDr5Lpuj3FicKJArS3XeOUhQMdlcCjqbg==
   dependencies:
     "@alchemy/aa-core" "0.1.0-alpha.23"
     "@alchemy/aa-ethers" "0.1.0-alpha.23"
@@ -2283,17 +2283,17 @@
     merkletreejs "^0.3.10"
     viem "^1.5.3"
 
-"@zerodev/web3auth@4.6.0":
-  version "4.6.0"
-  resolved "https://registry.yarnpkg.com/@zerodev/web3auth/-/web3auth-4.6.0.tgz#8b828f718e69b0437886811f704050db88c72f3f"
-  integrity sha512-T7Njb4/fGvL1yveS13TJ7LVDxZqg05RtVrWypeOH8eXVmjGzZAlbzZ8bKMUYCTKUJ871QRPHxf/OU2vFznoYqQ==
+"@zerodev/web3auth@4.6.1":
+  version "4.6.1"
+  resolved "https://registry.yarnpkg.com/@zerodev/web3auth/-/web3auth-4.6.1.tgz#cac7fef30f5d584625cf6744259368f64820d31d"
+  integrity sha512-FgNUTO9XD3RxZujOqrNb10y3qmmICVqKUqTqvHBOhaV1W9YI/C0a6KzK9sEFywf3RNnkXT0fE5GfpsNFQbn37Q==
   dependencies:
     "@web3auth/base" "7.0.1"
     "@web3auth/ethereum-provider" "7.0.2"
     "@web3auth/modal" "7.0.3"
     "@web3auth/no-modal" "7.0.1"
     "@web3auth/openlogin-adapter" "7.0.1"
-    "@zerodev/sdk" "4.6.0"
+    "@zerodev/sdk" "4.6.1"
 
 JSONStream@^1.3.5:
   version "1.3.5"
