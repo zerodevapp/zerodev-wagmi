@@ -34,6 +34,7 @@ export const ZeroDevPrivyWagmiProvider: React.FC<ZeroDevPrivyWagmiProviderProps>
     const { ready, authenticated, user, logout } = usePrivy();
     const { wallets: eoaWallets } = useWallets();
     const [data, setData] = useState<KernelApiResponse>();
+    const [connectorKey, setConnectorKey] = useState(0);
 
     const { chains } = wagmiChainsConfig;
     const hasEmbeddedWallet = !!(user && user.linkedAccounts.find((account) => account.type === 'wallet' && account.walletClientType === 'privy'));
@@ -76,18 +77,23 @@ export const ZeroDevPrivyWagmiProvider: React.FC<ZeroDevPrivyWagmiProviderProps>
         if (!readyForConnector) return;
 
         // Check if the app would like to use smart wallets for non-embedded EOAs
-        if (useSmartWalletForExternalEOA === false) {
+        if (useSmartWalletForExternalEOA === false && !hasEmbeddedWallet) {
             // If no smart wallets for external EOAs, return undefined. Downstream, this will default to the regular PrivyConnector
             return undefined;
         } else {
             // If they do want smart wallets for external EOAs, return the ZeroDevPrivyConnector with the active wallet set as the latest connected wallet
             const kernelData = data?.[data.length - 1];
+            setConnectorKey(connectorKey + 1);
             return new ZeroDevPrivyConnector({ logout, chains, activeWallet, options, kernelAddress: kernelData?.kernel });
         }
     }, [readyForConnector, chains, useSmartWalletForExternalEOA, activeWallet?.address, eoaWallets?.[0]?.address]);
 
     return (
-    <PrivyWagmiConnector wagmiChainsConfig={wagmiChainsConfig} privyConnectorOverride={connector}>
+    <PrivyWagmiConnector
+        key={connectorKey}
+        wagmiChainsConfig={wagmiChainsConfig}
+        privyConnectorOverride={connector}
+    >
         {children}
     </PrivyWagmiConnector>
   );
