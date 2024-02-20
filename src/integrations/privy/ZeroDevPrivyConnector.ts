@@ -87,6 +87,10 @@ export class ZeroDevPrivyConnector extends PrivyConnector {
             transport: custom(ecdsaProvider),
         });
         // @ts-expect-error
+        walletClient.sendUserOperation = ecdsaProvider.sendUserOperation.bind(ecdsaProvider)
+        // @ts-expect-error
+        walletClient.waitForUserOperationTransaction = ecdsaProvider.waitForUserOperationTransaction.bind(ecdsaProvider)
+        // @ts-expect-error
         walletClient.ecdsaProvider = ecdsaProvider;
 
         return walletClient as WalletClient;
