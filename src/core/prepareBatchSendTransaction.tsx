@@ -33,7 +33,7 @@ export async function prepareBatchSendTransaction<TSigner extends ZeroDevSigner 
   }
 
   const transactionRequest = await signer.getExecBatchTransaction(calls) as Promise<TransactionRequest>;
-  const gasLimit = (await signer.estimateGas(transactionRequest as Deferrable<TransactionRequest>, ExecuteType.EXECUTE_BATCH));
+  const gasLimit = (await signer.estimateGas(transactionRequest as Deferrable<TransactionRequest>, {}, ExecuteType.EXECUTE_BATCH));
 
   return {
     chainId,

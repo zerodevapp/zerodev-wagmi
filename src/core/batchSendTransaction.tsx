@@ -40,6 +40,7 @@ export async function batchSendTransaction({
   try {
     const { hash, wait } = await signer.sendTransaction(
       request,
+      {},
       ExecuteType.EXECUTE_BATCH
     )
 
