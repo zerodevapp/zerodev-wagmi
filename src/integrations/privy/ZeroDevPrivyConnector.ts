@@ -12,6 +12,7 @@ export class ZeroDevPrivyConnector extends PrivyConnector {
     projectsConfiguration: Promise<ProjectConfiguration>
     chainIdProjectIdMap: {[key: number]: string} = {}
     kernelAddress?: Hex
+    rpcUrl?: string
 
     constructor({
         logout,
@@ -32,6 +33,7 @@ export class ZeroDevPrivyConnector extends PrivyConnector {
         if (options.projectId && !options.projectIds) options.projectIds = [options.projectId]
         this.kernelAddress = kernelAddress
         this.projectsConfiguration = getProjectsConfiguration(options.projectIds!)
+        this.rpcUrl = options.rpcUrl
     }
 
     async getProjectIdFromChainId(chainId: number) {
@@ -68,6 +70,12 @@ export class ZeroDevPrivyConnector extends PrivyConnector {
                 projectId: await this.getProjectIdFromChainId(await this.getChainId()),
                 owner: getRPCProviderOwner(await this.getProvider()),
                 opts: {
+                    providerConfig: {
+                        rpcUrl: this.rpcUrl,
+                    },
+                    validatorConfig: {
+                        rpcUrl: this.rpcUrl,
+                    },
                     accountConfig: {
                         accountAddress: this.kernelAddress,
                     },
