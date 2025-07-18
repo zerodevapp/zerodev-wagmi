@@ -1,6 +1,6 @@
 import { Hex, createWalletClient, custom } from 'viem';
 import { PrivyConnector } from '@privy-io/wagmi-connector';
-import { ECDSAProvider, getRPCProviderOwner } from '@zerodev/sdk'
+import { ECDSAProvider, getRPCProviderOwner, PaymasterAndBundlerProviders, SupportedGasToken } from '@zerodev/sdk'
 import { WalletClient, Chain } from 'wagmi';
 import { ConnectedWallet } from '@privy-io/react-auth';
 import { AccountParams } from '../../connectors/ZeroDevConnector';
@@ -13,6 +13,10 @@ export class ZeroDevPrivyConnector extends PrivyConnector {
     chainIdProjectIdMap: {[key: number]: string} = {}
     kernelAddress?: Hex
     rpcUrl?: string
+    bundlerProvider?: PaymasterAndBundlerProviders
+    paymasterProvider?: PaymasterAndBundlerProviders
+    onlySendSponsoredTransaction?: boolean
+    gasToken?: SupportedGasToken
 
     constructor({
         logout,
@@ -34,6 +38,10 @@ export class ZeroDevPrivyConnector extends PrivyConnector {
         this.kernelAddress = kernelAddress
         this.projectsConfiguration = getProjectsConfiguration(options.projectIds!)
         this.rpcUrl = options.rpcUrl
+        this.bundlerProvider = options.bundlerProvider
+        this.paymasterProvider = options.paymasterProvider
+        this.onlySendSponsoredTransaction = options.onlySendSponsoredTransaction
+        this.gasToken = options.gasToken
     }
 
     async getProjectIdFromChainId(chainId: number) {
@@ -72,12 +80,19 @@ export class ZeroDevPrivyConnector extends PrivyConnector {
                 opts: {
                     providerConfig: {
                         rpcUrl: this.rpcUrl,
+                        bundlerProvider: this.bundlerProvider,
                     },
                     validatorConfig: {
                         rpcUrl: this.rpcUrl,
                     },
                     accountConfig: {
                         accountAddress: this.kernelAddress,
+                    },
+                    paymasterConfig: {
+                        paymasterProvider: this.paymasterProvider,
+                        onlySendSponsoredTransaction: this.onlySendSponsoredTransaction,
+                        policy: this.gasToken ? 'TOKEN_PAYMASTER' :  "VERIFYING_PAYMASTER",
+                        gasToken: this.gasToken
                     },
                 }
             });
